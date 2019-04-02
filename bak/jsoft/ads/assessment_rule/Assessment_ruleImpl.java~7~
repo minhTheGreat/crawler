@@ -1,0 +1,211 @@
+package jsoft.ads.assessment_rule;
+
+import jsoft.objects.Assessment_ruleObject;
+import java.sql.*;
+import jsoft.objects.*;
+import jsoft.ads.basic.*;
+import jsoft.*;
+
+
+public class Assessment_ruleImpl extends BasicImpl implements Assessment_rule {
+    public Assessment_ruleImpl(ConnectionPool cp, String objectName) {
+        super(cp, objectName);
+    }
+
+    /**
+     * addAssessment_rule
+     *
+     * @param item Assessment_ruleObject
+     * @return boolean
+     * @todo Implement this jsoft.ads.category.Assessment_rule method
+     */
+    public boolean addAssessment_rule(Assessment_ruleObject item) {
+
+        //Kiem tra su ton tai
+        if(this.isExisting(item)){
+            return false;
+        }
+
+        String sql = "INSERT INTO tblassessment_rule( ";
+
+        sql += "ar_name, ar_point,  ";
+        sql += "ar_enable, ar_delete, ";
+        sql += "ar_created_at, ar_creator_id, ) ";
+        sql += "ar_creator_name, ar_last_updated_at, ) ";
+        sql += "ar_last_updator_id, ar_last_updator_name, ) ";
+        sql += "ar_framework) ";
+
+        sql += "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+
+        //Bien dich
+        try {
+            PreparedStatement pre = this.con.prepareStatement(sql);
+
+            //Truyen gia tri
+            pre.setString(1, item.getAr_name());
+            pre.setInt(2, item.getAr_point());
+            pre.setBoolean(3, item.isAr_enable());
+            pre.setBoolean(4, item.isAr_delete());
+            pre.setString(5, item.getAr_created_at());
+            pre.setInt(6, item.getAr_creator_id());
+            pre.setString(7, item.getAr_creator_name());
+            pre.setString(8, item.getAr_last_updated_at());
+            pre.setInt(9, item.getAr_last_updator_id());
+            pre.setString(10, item.getAr_last_updator_name());
+            pre.setInt(11, item.getAr_framework());
+
+            //Tra ve ket qua
+            return this.add(pre);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return false;
+
+    }
+
+    //Khi them khi trung ten
+    private boolean isExisting(Assessment_ruleObject item) {
+        boolean flag = false;
+
+        String sql = "SELECT assessment_rule_id FROM tblassessment_rule ";
+        sql += "WHERE ar_name='" + item.getAr_name() + "' ";
+
+        ResultSet rs = this.gets(sql);
+        if (rs != null) {
+            try {
+                if (rs.next()) {
+                    flag = true;
+                }
+                rs.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        return flag;
+    }
+
+
+    /**
+     * delAssessment_rule
+     *
+     * @param item Assessment_ruleObject
+     * @return boolean
+     * @todo Implement this jsoft.ads.category.Assessment_rule method
+     */
+    public boolean delAssessment_rule(Assessment_ruleObject item) {
+
+        String sql  = "DELETE FROM tblassessment_rule WHERE assessment_rule_id=?";
+        try {
+            PreparedStatement pre = this.con.prepareStatement(sql);
+            pre.setInt(1, item.getAr_id());
+
+            return this.del(pre);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return false;
+    }
+
+    /**
+     * editAssessment_rule
+     *
+     * @param item Assessment_ruleObject
+     * @return boolean
+     * @todo Implement this jsoft.ads.category.Assessment_rule method
+     */
+    public boolean editAssessment_rule(Assessment_ruleObject item) {
+        //Cau lenh cap nhat sua
+        String sql = "UPDATE tblassessment_rule SET ";
+
+        sql += "ar_name=?, ar_point=?,  ";
+        sql += "ar_enable=?, ar_delete=?, ";
+        sql += "ar_creator_name=?, ar_last_updated_at=?, ) ";
+        sql += "ar_last_updator_id=?, ar_last_updator_name=?, ) ";
+        sql += "ar_framework=? ";
+
+        sql += "WHERE ar_id=?";
+
+        //Bien dich
+        try {
+            PreparedStatement pre = this.con.prepareStatement(sql);
+
+            //Truyen gia tri
+            pre.setString(1, item.getAr_name());
+            pre.setInt(2, item.getAr_point());
+            pre.setBoolean(3, item.isAr_enable());
+            pre.setBoolean(4, item.isAr_delete());
+
+            pre.setString(5, item.getAr_creator_name());
+            pre.setString(6, item.getAr_last_updated_at());
+            pre.setInt(7, item.getAr_last_updator_id());
+            pre.setString(8, item.getAr_last_updator_name());
+            pre.setInt(9, item.getAr_framework());
+
+            pre.setInt(10, item.getAr_id());
+
+            //Tra ve ket qua
+            return this.edit(pre);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return false;
+    }
+
+    /**
+     * getCP
+     *
+     * @return ConnectionPool
+     * @todo Implement this jsoft.ShareControl method
+     */
+    public ConnectionPool getCP() {
+        return null;
+    }
+
+    /**
+     * getAssessment_rule
+     *
+     * @param id int
+     * @return ResultSet
+     * @todo Implement this jsoft.ads.category.Assessment_rule method
+     */
+    public ResultSet getAssessment_rule(int id) {
+        String sql = "SELECT * FROM tblassessment_rule WHERE ar_id=?";
+        return this.get(sql, id);
+    }
+
+    /**
+     * getAssessment_rules
+     *
+     * @param similar Assessment_ruleObject
+     * @param at int
+     * @param total byte
+     * @return ResultSet
+     * @todo Implement this jsoft.ads.category.Assessment_rule method
+     */
+    public ResultSet getAssessment_rules(Assessment_ruleObject similar, int at, byte total) {
+        String sql = "SELECT * FROM tblassessment_rule ";
+        sql += "";
+        sql += "";
+        sql += "ORDER BY ar_name ASC ";
+//        sql += "LIMIT "+at+", "+total;
+
+        return this.gets(sql);
+
+    }
+
+    /**
+     * releaseCon
+     *
+     * @todo Implement this jsoft.ShareControl method
+     */
+    public void releaseCon() {
+    }
+
+}

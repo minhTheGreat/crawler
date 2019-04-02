@@ -1,0 +1,130 @@
+package jsoft.ads.assessment_rule;
+
+import jsoft.ConnectionPool;
+import jsoft.objects.*;
+import java.util.*;
+import java.sql.*;
+
+
+/**
+ * <p>Title: JP1707 Project</p>
+ *
+ * <p>Description: </p>
+ *
+ * <p>Copyright: Copyright (c) 2018</p>
+ *
+ * <p>Company: </p>
+ *
+ * @author TrungHieu
+ * @version 1.0
+ */
+public class Assessment_ruleModel {
+
+    private Assessment_rule a;
+
+    public Assessment_ruleModel(ConnectionPool cp) {
+        this.a = new Assessment_ruleImpl(cp, "Assessment_rule");
+    }
+
+    protected void finallize() throws Throwable {
+        this.a = null;
+        super.finalize();
+    }
+
+    public ConnectionPool getCP() {
+        return this.a.getCP();
+    }
+
+    public void releaseCon() {
+        this.a.releaseCon();
+    }
+
+
+    //----------------------------------------------------
+
+    public boolean addAssessment_rule(Assessment_ruleObject item) {
+        return this.a.addAssessment_rule(item);
+    }
+
+    public boolean editAssessment_rule(Assessment_ruleObject item) {
+        return this.a.editAssessment_rule(item);
+    }
+
+    public boolean delAssessment_rule(Assessment_ruleObject item) {
+        return this.a.delAssessment_rule(item);
+    }
+
+    //----------------------------------------------------
+
+    public Assessment_ruleObject getAssessment_ruleObject(int id) {
+        Assessment_ruleObject item = null;
+
+        //Lay du lieu vao database,
+        ResultSet rs = this.a.getAssessment_rule(id);
+        if (rs != null) {
+            try {
+                if (rs.next()) {
+                    item = new Assessment_ruleObject();
+                    item.setAr_id(rs.getInt("ar_id"));
+                    item.setAr_name(rs.getString("ar_name"));
+                    item.setAr_point(rs.getInt("ar_point"));
+                    item.setAr_enable(rs.getBoolean("ar_enable"));
+                    item.setAr_delete(rs.getBoolean("ar_delete"));
+                    item.setAr_created_at(rs.getString("ar_created_at"));
+                    item.setAr_creator_id(rs.getInt("ar_creator_id"));
+                    item.setAr_creator_name(rs.getString("ar_creator_name"));
+                    item.setAr_last_updated_at(rs.getString("ar_last_updated_at"));
+                    item.setAr_last_updator_id(rs.getInt("ar_last_updator_id"));
+                    item.setAr_last_updator_name(rs.getString("ar_last_updator_name"));
+                    item.setAr_framework(rs.getInt("ar_framework"));
+
+                }
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        return item;
+    }
+
+    public ArrayList getAssessment_ruleObjects(Assessment_ruleObject similar, int page,
+                                        byte total) {
+
+        ArrayList items = new ArrayList();
+        Assessment_ruleObject item = null;
+
+        //Lay du lieu vao database,
+        int at = (page - 1) * total;
+
+        ResultSet rs = this.a.getAssessment_rules(similar, 0, 10);
+        if (rs != null) {
+            try {
+                while (rs.next()) {
+                    item = new Assessment_ruleObject();
+                    item.setAr_id(rs.getInt("ar_id"));
+                    item.setAr_name(rs.getString("ar_name"));
+                    item.setAr_point(rs.getInt("ar_point"));
+                    item.setAr_enable(rs.getBoolean("ar_enable"));
+                    item.setAr_delete(rs.getBoolean("ar_delete"));
+                    item.setAr_created_at(rs.getString("ar_created_at"));
+                    item.setAr_creator_id(rs.getInt("ar_creator_id"));
+                    item.setAr_creator_name(rs.getString("ar_creator_name"));
+                    item.setAr_last_updated_at(rs.getString("ar_last_updated_at"));
+                    item.setAr_last_updator_id(rs.getInt("ar_last_updator_id"));
+                    item.setAr_last_updator_name(rs.getString("ar_last_updator_name"));
+                    item.setAr_framework(rs.getInt("ar_framework"));
+
+                    items.add(item);
+
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        return items;
+    }
+
+
+}

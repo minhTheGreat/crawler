@@ -1,0 +1,33 @@
+package jsoft.objects;
+
+public class Framework_assessmentObject {
+    private int fa_id;
+    private int fa_assessment_id;
+    private int fa_ar_id;
+    public Framework_assessmentObject() {
+    }
+
+    public void setFa_id(int fa_id) {
+        this.fa_id = fa_id;
+    }
+
+    public void setFa_assessment_id(int fa_assessment_id) {
+        this.fa_assessment_id = fa_assessment_id;
+    }
+
+    public void setFa_ar_id(int fa_ar_id) {
+        this.fa_ar_id = fa_ar_id;
+    }
+
+    public int getFa_id() {
+        return fa_id;
+    }
+
+    public int getFa_assessment_id() {
+        return fa_assessment_id;
+    }
+
+    public int getFa_ar_id() {
+        return fa_ar_id;
+    }
+}

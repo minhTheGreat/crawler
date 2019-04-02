@@ -1,0 +1,66 @@
+<%@page language="java" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
+
+<div class="single_bottom_rightbar">
+            <ul role="tablist" class="nav nav-tabs custom-tabs">
+              <li class="active" role="presentation"><a data-toggle="tab" role="tab" aria-controls="home" href="#mostPopular">Bài báo hot nhất</a></li>
+              <li role="presentation"><a data-toggle="tab" role="tab" aria-controls="messages" href="#recentComent">Bài viết vừa đọc</a></li>
+            </ul>
+            <div class="tab-content">
+              <div id="mostPopular" class="tab-pane fade in active" role="tabpanel">
+                <ul class="small_catg popular_catg wow fadeInDown">
+                  <li>
+                    <div class="media wow fadeInDown"> <a class="media-left" href="#"><img src="images/rick-kid.jpg" alt=""></a>
+                      <div class="media-body">
+                        <h4 class="media-heading"><a href="#">Người giàu Việt ngày càng nhiều, chi tiêu càng cao</a></h4>
+                        <p>Những món hàng giá "đắt vô lý" với không ít người, dần được đón nhận nhiều hơn ở Việt Nam nhờ giới nhà giàu và siêu giàu.</p>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="media wow fadeInDown"> <a class="media-left" href="#"><img src="images/hdba-3799-1524283352-8325-1536585488.jpg" alt=""></a>
+                      <div class="media-body">
+                        <h4 class="media-heading"><a href="#">Ngân hàng Nhà nước chấp thuận sáp nhập PGBank vào HDBank</a></h4>
+                        <p>Dự kiến cuối năm nay thương vụ sáp nhập PGBank và HDBank sẽ hoàn tất và ngân hàng sau sáp nhập có quy mô vốn điều lệ 15.345 tỷ đồng.</p>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="media wow fadeInDown"> <a class="media-left" href="#"><img src="images/cacbicao-9214-1536578814.jpg" alt=""></a>
+                      <div class="media-body">
+                        <h4 class="media-heading"><a href="#">Cựu cán bộ Công an TP HCM lĩnh 14 năm tù vì buôn lậu 54 ôtô sang</a></h4>
+                        <p>Lam và đồng phạm thuê Việt kiều mang xe Rolls Royce, Bentley, Lexus, Porsche... về Sài Gòn bán cho chủ salon ôtô thu lợi hàng chục tỷ.</p>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div id="recentComent" class="tab-pane fade" role="tabpanel">
+                <ul class="small_catg popular_catg">
+                  <li>
+                    <div class="media wow fadeInDown"> <a class="media-left" href="#"><img src="images/112x112.jpg" alt=""></a>
+                      <div class="media-body">
+                        <h4 class="media-heading"><a href="#">Duis condimentum nunc pretium lobortis </a></h4>
+                        <p>Nunc tincidunt, elit non cursus euismod, lacus augue ornare metus, egestas imperdiet nulla nisl quis mauris. Suspendisse a pharetra </p>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="media wow fadeInDown"> <a class="media-left" href="#"><img src="images/112x112.jpg" alt=""></a>
+                      <div class="media-body">
+                        <h4 class="media-heading"><a href="#">Duis condimentum nunc pretium lobortis </a></h4>
+                        <p>Nunc tincidunt, elit non cursus euismod, lacus augue ornare metus, egestas imperdiet nulla nisl quis mauris. Suspendisse a pharetra </p>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="media wow fadeInDown"> <a class="media-left" href="#"><img src="images/112x112.jpg" alt=""></a>
+                      <div class="media-body">
+                        <h4 class="media-heading"><a href="#">Duis condimentum nunc pretium lobortis </a></h4>
+                        <p>Nunc tincidunt, elit non cursus euismod, lacus augue ornare metus, egestas imperdiet nulla nisl quis mauris. Suspendisse a pharetra </p>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>

@@ -1,0 +1,106 @@
+package jsoft.objects;
+
+public class Framework_assessmentObject extends ArticleObject {
+    private int fa_id;
+    private int fa_article_id;
+    private boolean fa_enable;
+    private boolean fa_delete;
+    private String fa_created_at;
+    private int fa_creator_id;
+    private String fa_creator_name;
+    private String fa_last_updated_at;
+    private int fa_last_updator_id;
+    private String fa_last_updator_name;
+    private String fa_name;
+    public Framework_assessmentObject() {
+    }
+
+    public void setFa_id(int fa_id) {
+        this.fa_id = fa_id;
+    }
+
+    public void setFa_article_id(int fa_article_id) {
+        this.fa_article_id = fa_article_id;
+    }
+
+    public void setFa_enable(boolean fa_enable) {
+        this.fa_enable = fa_enable;
+    }
+
+    public void setFa_delete(boolean fa_delete) {
+        this.fa_delete = fa_delete;
+    }
+
+    public void setFa_created_at(String fa_created_at) {
+        this.fa_created_at = fa_created_at;
+    }
+
+    public void setFa_creator_id(int fa_creator_id) {
+        this.fa_creator_id = fa_creator_id;
+    }
+
+    public void setFa_creator_name(String fa_creator_name) {
+        this.fa_creator_name = fa_creator_name;
+    }
+
+    public void setFa_last_updated_at(String fa_last_updated_at) {
+        this.fa_last_updated_at = fa_last_updated_at;
+    }
+
+    public void setFa_last_updator_id(int fa_last_updator_id) {
+        this.fa_last_updator_id = fa_last_updator_id;
+    }
+
+    public void setFa_last_updator_name(String fa_last_updator_name) {
+        this.fa_last_updator_name = fa_last_updator_name;
+    }
+
+    public void setFa_name(String fa_name) {
+        this.fa_name = fa_name;
+    }
+
+    public int getFa_id() {
+        return fa_id;
+    }
+
+    public int getFa_article_id() {
+        return fa_article_id;
+    }
+
+    public boolean isFa_enable() {
+        return fa_enable;
+    }
+
+    public boolean isFa_delete() {
+        return fa_delete;
+    }
+
+    public String getFa_created_at() {
+        return fa_created_at;
+    }
+
+    public int getFa_creator_id() {
+        return fa_creator_id;
+    }
+
+    public String getFa_creator_name() {
+        return fa_creator_name;
+    }
+
+    public String getFa_last_updated_at() {
+        return fa_last_updated_at;
+    }
+
+    public int getFa_last_updator_id() {
+        return fa_last_updator_id;
+    }
+
+    public String getFa_last_updator_name() {
+        return fa_last_updator_name;
+    }
+
+    public String getFa_name() {
+        return fa_name;
+    }
+
+}

@@ -1,0 +1,108 @@
+package jsoft.ads.assessment_rule;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.io.*;
+import java.util.*;
+import jsoft.objects.*;
+import jsoft.*;
+import jsoft.ads.source.*;
+
+public class Assessment_ruleView extends HttpServlet {
+    private static final String CONTENT_TYPE = "text/html; charset=utf-8";
+
+    //Initialize global variables
+    public void init() throws ServletException {
+    }
+
+    //Process the HTTP Get request
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws
+            ServletException, IOException {
+        response.setContentType(CONTENT_TYPE);
+        PrintWriter out = response.getWriter();
+        //tim thong tin dang nhap he thong
+          UserObject user = ( UserObject) request.getSession().getAttribute(
+                  "userLogined");
+
+          //Kiem tra
+          if (user == null) {
+              response.sendRedirect("/adv/user/login");
+          } else {
+              view(request, response);
+          }
+
+    }
+
+    private void view(HttpServletRequest request, HttpServletResponse response) throws
+           ServletException, IOException {
+       response.setContentType(CONTENT_TYPE);
+       PrintWriter out = response.getWriter();
+       //Tim bo quan li ket noi
+       ConnectionPool cp = (ConnectionPool) getServletContext().getAttribute(
+               "CPool");
+
+       //Tao doi tuong thuc thi chuc nang
+       Assessment_ruleControl cc = new Assessment_ruleControl(cp);
+
+       if (cp == null) {
+           getServletContext().setAttribute("CPool", cc.getCP());
+       }
+       //Lay cau truc HTML trinh bay
+       String view = cc.viewAssessment_rules(null, (short) 1, (byte) 15);
+
+       //Tra ve ket noi
+       cc.releaseCon();
+
+       //Tim cau truc cua header ghep lai
+       RequestDispatcher h = request.getRequestDispatcher("/header");
+       if (h != null) {
+           h.include(request, response);
+       }
+
+       out.print("<div class=\"content \">");
+
+       out.print("<div class=\"animated fadeIn\">");
+       out.print("<div class=\"row\">");
+       out.print("<div class=\"col-md-12\">");
+       out.print("<div class=\"card\">");
+       out.print("<div class=\"card-header\">");
+       out.print("<strong class=\"card-title\">Tiêu chí \u0111ánh giá</strong>");
+       out.print("<a href=\"new.html\" class=\"btn btn-success pull-right\">");
+       out.print("<i class=\"fa fa-plus\" style=\"size: 30px;color: white\"></i>");
+       out.print("Thêm tiêu chí");
+       //out.print("<img src=\"/adv/images/adduser.png\" />");
+
+       out.print("</a>");
+
+       out.print("</div>");
+       out.print("<div class=\"card-body\">");
+
+       out.print(view);
+
+       out.print("</div>");
+       out.print("</div>");
+       out.print("</div>");
+       out.print("</div>");
+       out.print("</div><!-- .animated -->");
+
+       out.print("</div> <!-- .content -->");
+       out.print("<div class=\"clearfix\"></div>");
+
+       //Tim footer va ghep
+       RequestDispatcher f = request.getRequestDispatcher("/footer");
+       if (f != null) {
+           f.include(request, response);
+       }
+
+   }
+
+    //Process the HTTP Post request
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws
+            ServletException, IOException {
+        doGet(request, response);
+    }
+
+    //Clean up resources
+    public void destroy() {
+    }
+}

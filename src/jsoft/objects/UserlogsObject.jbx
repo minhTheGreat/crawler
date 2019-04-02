@@ -1,0 +1,12 @@
+[PropertyInfo]
+ul_id,int,false,false,ul_id,ul_id,true,<default>
+ul_user_id,int,false,false,ul_user_id,ul_user_id,true,<default>
+ul_arrticle_id,int,false,false,ul_arrticle_id,ul_arrticle_id,true,<default>
+ul_category_id,int,false,false,ul_category_id,ul_category_id,true,<default>
+ul_source_id,int,false,false,ul_source_id,ul_source_id,true,<default>
+ul_viewed_at,String,false,false,ul_viewed_at,ul_viewed_at,true,<default>
+[IconNames]
+
+
+
+

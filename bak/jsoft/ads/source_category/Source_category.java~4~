@@ -1,0 +1,22 @@
+package jsoft.ads.source_category;
+
+import java.sql.*;
+import jsoft.objects.*;
+import jsoft.ShareControl;
+
+public interface Source_category extends ShareControl {
+
+    //Cac chuc nang cap nhat nguoi su dung
+    public boolean addSource_category(Source_categoryObject item);
+
+    public boolean editSource_category(Source_categoryObject item);
+
+    public boolean delSource_category(Source_categoryObject item);
+
+    //Cac chuc nang lay du lieu
+    public ResultSet getSource_category(int id);
+
+    public ResultSet getSource_categorys(Source_categoryObject similar, int at,
+                                         byte total);
+
+}

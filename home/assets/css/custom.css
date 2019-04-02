@@ -1,0 +1,41 @@
+* {
+	font-family: 'Nunito', sans-serif !important;
+}
+
+.logo {
+  font-size: 28px;
+}
+
+.scrollToTop span:after {
+	content: '\21EE';
+}
+
+.single_bottom_rightbar ul li > a:before {
+	content: '';
+}
+
+.single_bottom_rightbar ul li > a:hover {
+	color: #ddd;
+}
+
+.modal-submit {
+	color: #fff;
+	background: #f08ecf;
+}
+
+.modal-submit:hover {
+	color: #ffa500;
+	background: #fff;
+}
+
+.modal-footer {
+	border-top: 1px solid #ffa500;
+}
+
+.share_post a i {
+	font-family: "FontAwesome" !important;
+}
+
+.catg1_img img, .media-left, .media-left > img {
+	height: auto;
+}

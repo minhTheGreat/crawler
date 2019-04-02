@@ -1,0 +1,17 @@
+[PropertyInfo]
+fa_article_id,int,false,false,fa_article_id,fa_article_id,true,<default>
+fa_created_at,String,false,false,fa_created_at,fa_created_at,true,<default>
+fa_creator_id,int,false,false,fa_creator_id,fa_creator_id,true,<default>
+fa_creator_name,String,false,false,fa_creator_name,fa_creator_name,true,<default>
+fa_delete,boolean,false,false,fa_delete,fa_delete,true,<default>
+fa_enable,boolean,false,false,fa_enable,fa_enable,true,<default>
+fa_id,int,false,false,fa_id,fa_id,true,<default>
+fa_last_updated_at,String,false,false,fa_last_updated_at,fa_last_updated_at,true,<default>
+fa_last_updator_id,int,false,false,fa_last_updator_id,fa_last_updator_id,true,<default>
+fa_last_updator_name,String,false,false,fa_last_updator_name,fa_last_updator_name,true,<default>
+fa_name,String,false,false,fa_name,fa_name,true,<default>
+[IconNames]
+
+
+
+

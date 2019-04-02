@@ -1,0 +1,191 @@
+package jsoft.ads.user;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.io.*;
+import java.util.*;
+
+import jsoft.objects.*;
+import jsoft.*;
+import jsoft.library.*;
+
+public class UserAE extends HttpServlet {
+    private static final String CONTENT_TYPE = "text/html; charset=utf-8";
+
+    //Initialize global variables
+    public void init() throws ServletException {
+    }
+
+    //Process the HTTP Get request
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws
+            ServletException, IOException {
+        //tim thong tin dang nhap he thong
+        UserObject user = (UserObject) request.getSession().getAttribute(
+                "userLogined");
+
+        //Kiem tra
+        if (user == null) {
+            response.sendRedirect("/adv/user/login");
+        } else {
+            view(request, response);
+        }
+    }
+
+    private void view(HttpServletRequest request, HttpServletResponse response) throws
+            ServletException, IOException {
+        response.setContentType(CONTENT_TYPE);
+        PrintWriter out = response.getWriter();
+
+        String lblSave = "C\u1EADp nh\u1EADt";
+
+        //Tim bo quan li ket noi
+        ConnectionPool cp = (ConnectionPool) getServletContext().getAttribute("CPool");
+        //Tao doi tuong thuc thi chuc nang
+        UserControl uc = new UserControl(cp);
+
+        if (cp == null) {
+            getServletContext().setAttribute("CPool", uc.getCP());
+        }
+
+        //Tra ve ket noi
+        uc.releaseCon();
+
+        //Tim cau truc cua header ghep lai
+        RequestDispatcher h = request.getRequestDispatcher("/header");
+        if (h != null) {
+            h.include(request, response);
+        }
+
+        out.print("<div class=\"content\">");
+        out.print("<div class=\"card\">");
+        out.print("<form action method>");
+        out.print(
+                "<div class=\"card-header\"><strong>Thêm m\u1EDBi ng\u01B0\u1EDDi dùng</strong></div>");
+        out.print("<div class=\"card-body card-block\">");
+        out.print("<div class=\"form-group\">");
+        out.print(
+                "<label for=\"txtName\" class=\" form-control-label required\">Tên</label>");
+        out.print("<input type=\"text\" name=\"txtName\" id=\"txtName\" placeholder=\"Nh\u1EADp tên\" class=\"form-control\" required>");
+        out.print("</div>");
+        out.print("<div class=\"form-group\">");
+        out.print("<label for=\"txtFullName\" class=\" form-control-label required\">Tên \u0111\u1EA7y \u0111\u1EE7</label>");
+        out.print("<input type=\"text\" id=\"txtFullName\" name=\"txtFullName\" placeholder=\"Nh\u1EADp h\u1ECD tên \u0111\u1EA7y \u0111\u1EE7\" class=\"form-control\" required>");
+        out.print("</div>");
+        out.print("<div class=\"form-group\">");
+        out.print(
+                "<label for=\"txtEmail\" class=\" form-control-label required\">Email</label>");
+        out.print("<input type=\"text\" id=\"txtEmail\" name=\"txtEmail\" placeholder=\"Th\u01B0 \u0111i\u1EC7n t\u1EED\" class=\"form-control\" required>");
+        out.print("</div>");
+        out.print("<div class=\"form-group\">");
+        out.print("<label for=\"txtAddress1\" class=\" form-control-label required\">\u0110\u1ECBa ch\u1EC9</label>");
+        out.print("<input type=\"text\" id=\"txtAddress1\" name=\"txtAddress1\" placeholder=\"\u0110\u1ECBa ch\u1EC9\" class=\"form-control\" required>");
+        out.print("</div>");
+        out.print("<div class=\"form-group\">");
+        out.print(
+                "<label for=\"txtAddress\" class=\" form-control-label\">S\u1ED1 \u0111i\u1EC7n tho\u1EA1i</label>");
+        out.print("<input type=\"text\" id=\"txtPhone\" name=\"txtPhone\" placeholder=\"S\u1ED1 \u0111i\u1EC7n tho\u1EA1i\" class=\"form-control\">");
+        out.print("</div>");
+        out.print("<div class=\"form-group\">");
+        out.print(
+                "<label for=\"dateBirthday\" class=\" form-control-label\">Ngày sinh</label>");
+        out.print("<input type=\"date\" id=\"dateBirthday\" name=\"txtDate\" class=\"form-control\">");
+        out.print("</div>");
+        out.print("<div class=\"form-group\">");
+        out.print(
+                "<label for=\"selectRole\" class=\" form-control-label\">Vai trò</label>");
+        out.print("<select name=\"selectRole\" id=\"selectRole\" class=\"form-control-sm form-control\">");
+        out.print("<option value=\"0\">-- Vai trò --</option>");
+        out.print("<option value=\"1\">Thành viên</option>");
+        out.print("<option value=\"2\">Qu\u1EA3n lý n\u1ED9i dung</option>");
+        out.print("<option value=\"3\">Ng\u01B0\u1EDDi duy\u1EC7t n\u1ED9i dung</option>");
+        out.print("<option value=\"4\">Adminitrator</option>");
+        out.print("</select>");
+        out.print("</div>");
+        out.print("<center>");
+        out.print(
+                "<input type=\"submit\" value=\""+lblSave+"\" class=\"btn btn-primary\" onClick=\"saveUser(this.form)\" /> &nbsp;>");
+        out.print("</center>");
+        out.print("</div>");
+        out.print("</form>");
+        out.print("</div>");
+        out.print("</div><!-- .content -->");
+        out.print("<div class=\"clearfix\"></div>");
+
+        //Tim footer va ghep
+        RequestDispatcher f = request.getRequestDispatcher("/footer");
+        if (f != null) {
+            f.include(request, response);
+        }
+
+    }
+
+    //Process the HTTP Post request
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws
+            ServletException, IOException {
+        //Chi dan
+        request.setCharacterEncoding("utf-8");
+
+        //Lay thong tin nguoi su dung moi
+        String username = request.getParameter("txtAccName");
+        String userpass = request.getParameter("txtAccPass");
+        String useremail = request.getParameter("txtAccEmail");
+
+        if (username != null && userpass != null && useremail != null) {
+            if (!username.equalsIgnoreCase("") &&
+                !userpass.equalsIgnoreCase("") &&
+                !useremail.equalsIgnoreCase("")) {
+
+                //Lay tiep du lieu
+                String fullname = request.getParameter("txtFullname");
+                String address = request.getParameter("txtAddress1");
+                String phone = request.getParameter("txtPhone");
+
+                //Tim bo quan li ket noi
+                ConnectionPool cp = (ConnectionPool) getServletContext().
+                                    getAttribute("CPool");
+
+                //Tao doi tuong thuc thi chuc n\u0103ng
+                UserControl uc = new UserControl(cp);
+                if (cp == null) {
+                    getServletContext().setAttribute("CPool", uc.getCP());
+                }
+
+                //Tao doi tuong luu tru ttin
+                UserObject nUser = new UserObject();
+                nUser.setUser_name(username);
+                nUser.setUser_email(useremail);
+                nUser.setUser_password(userpass);
+
+                nUser.setUser_fullname(Utilities.encode(fullname));
+                nUser.setUser_address1(Utilities.encode(address));
+                nUser.setUser_phone_number(Integer.parseInt(phone));
+
+                //Thuc hien cap nhat
+                boolean result;
+
+                //Them moi
+                result = uc.addUser(nUser);
+
+                //TRa ve ket noi
+                uc.releaseCon();
+                System.out.println("a");
+                //Kiem tra ket qua
+                if (result) {
+                    response.sendRedirect("/adv/user/view");
+                } else {
+                    response.sendRedirect("/adv/user/ae?err=notok");
+                }
+
+            } else {
+                response.sendRedirect("/adv/user/ae?err=value");
+            }
+        } else {
+            response.sendRedirect("/adv/user/ae?err=param");
+        }
+
+    }
+
+    //Clean up resources
+    public void destroy() {
+    }
+}

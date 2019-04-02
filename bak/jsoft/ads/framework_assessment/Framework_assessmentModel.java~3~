@@ -1,0 +1,113 @@
+package jsoft.ads.framework_assessment;
+
+import jsoft.ConnectionPool;
+import jsoft.objects.*;
+import java.util.*;
+import java.sql.*;
+
+
+/**
+ * <p>Title: JP1707 Project</p>
+ *
+ * <p>Description: </p>
+ *
+ * <p>Copyright: Copyright (c) 2018</p>
+ *
+ * <p>Company: </p>
+ *
+ * @author TrungHieu
+ * @version 1.0
+ */
+public class Framework_assessmentModel {
+
+    private Framework_assessment f;
+
+    public Framework_assessmentModel(ConnectionPool cp) {
+        this.f = new Framework_assessmentImpl(cp);
+    }
+
+    protected void finallize() throws Throwable {
+        this.f = null;
+        super.finalize();
+    }
+
+    public ConnectionPool getCP() {
+        return this.f.getCP();
+    }
+
+    public void releaseCon() {
+        this.f.releaseCon();
+    }
+
+
+    //----------------------------------------------------
+
+    public boolean addFramework_assessment(Framework_assessmentObject item) {
+        return this.f.addFramework_assessment(item);
+    }
+
+    public boolean editFramework_assessment(Framework_assessmentObject item) {
+        return this.f.editFramework_assessment(item);
+    }
+
+    public boolean delFramework_assessment(Framework_assessmentObject item) {
+        return this.f.delFramework_assessment(item);
+    }
+
+    //----------------------------------------------------
+
+    public Framework_assessmentObject getFramework_assessmentObject(int id) {
+        Framework_assessmentObject item = null;
+
+        //Lay du lieu vao database,
+        ResultSet rs = this.f.getFramework_assessment(id);
+        if (rs != null) {
+            try {
+                if (rs.next()) {
+                    item = new Framework_assessmentObject();
+                    item.setAsssessment_id(rs.getInt("assessment_id"));
+                    item.setFramework_assessment_name(rs.getString("assessment_name"));
+                    item.setFramework_assessment_enable(rs.getBoolean("assessment_creator"));
+                    item.setFramework_assessment_type(rs.getByte("assessment_last_updated_at"));
+                }
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        return item;
+    }
+
+    public ArrayList getFramework_assessmentObjects(Framework_assessmentObject similar, int page,
+                                        byte total) {
+
+        ArrayList items = new ArrayList();
+        Framework_assessmentObject item = null;
+
+        //Lay du lieu vao database,
+        int at = (page - 1) * total;
+
+        ResultSet rs = this.f.getFramework_assessments(similar, at, total);
+        if (rs != null) {
+            try {
+                while (rs.next()) {
+                    item = new Framework_assessmentObject();
+                    item.setAsssessment_id(rs.getInt("assessment_id"));
+                    item.setFramework_assessment_name(rs.getString("assessment_name"));
+                    item.setFramework_assessment_enable(rs.getBoolean("assessment_creator"));
+                    item.setFramework_assessment_type(rs.getByte("assessment_last_updated_at"));
+
+                    items.add(item);
+
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        return items;
+    }
+
+
+}

@@ -1,0 +1,7 @@
+package jsoft.objects;
+
+public class Assessment_ruleObject {
+    public Assessment_ruleObject() {
+    }
+
+}

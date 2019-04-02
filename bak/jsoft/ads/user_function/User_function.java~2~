@@ -1,0 +1,17 @@
+package jsoft.ads.user_function;
+import java.sql.*;
+import jsoft.objects.*;
+import jsoft.ShareControl;
+
+public interface User_function extends ShareControl {
+
+    //Cac chuc nang cap nhat nguoi su dung
+    public boolean addUser_function(User_functionObject item);
+    public boolean editUser_function(User_functionObject item);
+    public boolean delUser_function(User_functionObject item);
+
+    //Cac chuc nang lay du lieu
+    public ResultSet getUser_function(int id);
+    public ResultSet getUser_functions(User_functionObject similar, int at, byte total);
+
+}

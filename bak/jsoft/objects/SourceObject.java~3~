@@ -1,0 +1,97 @@
+package jsoft.objects;
+
+public class SourceObject {
+    private int noti_readed_at;
+    private String source_name;
+    private String source_link;
+    private int source_creator;
+    private String source_last_updated_at;
+    private int source_last_updator;
+    private boolean source_enable;
+    private int source_assessment_id;
+    private int source_assessment_creator;
+    private String source_html_selector;
+    public SourceObject() {
+    }
+
+
+    public void setNoti_readed_at(int noti_readed_at) {
+        this.noti_readed_at = noti_readed_at;
+    }
+
+    public void setSource_name(String source_name) {
+        this.source_name = source_name;
+    }
+
+    public void setSource_link(String source_link) {
+        this.source_link = source_link;
+    }
+
+    public void setSource_creator(int source_creator) {
+        this.source_creator = source_creator;
+    }
+
+    public void setSource_last_updated_at(String source_last_updated_at) {
+        this.source_last_updated_at = source_last_updated_at;
+    }
+
+    public void setSource_last_updator(int source_last_updator) {
+        this.source_last_updator = source_last_updator;
+    }
+
+    public void setSource_enable(boolean source_enable) {
+        this.source_enable = source_enable;
+    }
+
+    public void setSource_assessment_id(int source_assessment_id) {
+        this.source_assessment_id = source_assessment_id;
+    }
+
+    public void setSource_assessment_creator(int source_assessment_creator) {
+        this.source_assessment_creator = source_assessment_creator;
+    }
+
+    public void setSource_html_selector(String source_html_selector) {
+        this.source_html_selector = source_html_selector;
+    }
+
+    public int getNoti_readed_at() {
+        return noti_readed_at;
+    }
+
+    public String getSource_name() {
+        return source_name;
+    }
+
+    public String getSource_link() {
+        return source_link;
+    }
+
+    public int getSource_creator() {
+        return source_creator;
+    }
+
+    public String getSource_last_updated_at() {
+        return source_last_updated_at;
+    }
+
+    public int getSource_last_updator() {
+        return source_last_updator;
+    }
+
+    public boolean isSource_enable() {
+        return source_enable;
+    }
+
+    public int getSource_assessment_id() {
+        return source_assessment_id;
+    }
+
+    public int getSource_assessment_creator() {
+        return source_assessment_creator;
+    }
+
+    public String getSource_html_selector() {
+        return source_html_selector;
+    }
+}

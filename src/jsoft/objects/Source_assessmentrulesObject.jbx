@@ -1,0 +1,11 @@
+[PropertyInfo]
+sar_id,int,false,false,sar_id,sar_id,true,<default>
+sar_ar_id,int,false,false,sar_ar_id,sar_ar_id,true,<default>
+sar_source_id,int,false,false,sar_source_id,sar_source_id,true,<default>
+sar_html_selector,String,false,false,sar_html_selector,sar_html_selector,true,<default>
+sar_creator_id,int,false,false,sar_creator_id,sar_creator_id,true,<default>
+[IconNames]
+
+
+
+

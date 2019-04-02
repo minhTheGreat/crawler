@@ -1,0 +1,113 @@
+package jsoft.ads.assessment;
+
+import jsoft.ConnectionPool;
+import jsoft.objects.*;
+import java.util.*;
+import java.sql.*;
+
+
+/**
+ * <p>Title: JP1707 Project</p>
+ *
+ * <p>Description: </p>
+ *
+ * <p>Copyright: Copyright (c) 2018</p>
+ *
+ * <p>Company: </p>
+ *
+ * @author TrungHieu
+ * @version 1.0
+ */
+public class AssessmentModel {
+
+    private Assessment a;
+
+    public AssessmentModel(ConnectionPool cp) {
+        this.a = new AssessmentImpl(cp);
+    }
+
+    protected void finallize() throws Throwable {
+        this.a = null;
+        super.finalize();
+    }
+
+    public ConnectionPool getCP() {
+        return this.a.getCP();
+    }
+
+    public void releaseCon() {
+        this.a.releaseCon();
+    }
+
+
+    //----------------------------------------------------
+
+    public boolean addAssessment(AssessmentObject item) {
+        return this.a.addAssessment(item);
+    }
+
+    public boolean editAssessment(AssessmentObject item) {
+        return this.a.editAssessment(item);
+    }
+
+    public boolean delAssessment(AssessmentObject item) {
+        return this.a.delAssessment(item);
+    }
+
+    //----------------------------------------------------
+
+    public AssessmentObject getAssessmentObject(int id) {
+        AssessmentObject item = null;
+
+        //Lay du lieu vao database,
+        ResultSet rs = this.a.getAssessment(id);
+        if (rs != null) {
+            try {
+                if (rs.next()) {
+                    item = new AssessmentObject();
+                    item.setAsssessment_id(rs.getInt("assessment_id"));
+                    item.setAssessment_name(rs.getString("assessment_name"));
+                    item.setAssessment_enable(rs.getBoolean("assessment_creator"));
+                    item.setAssessment_type(rs.getByte("assessment_last_updated_at"));
+                }
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        return item;
+    }
+
+    public ArrayList getAssessmentObjects(AssessmentObject similar, int page,
+                                        byte total) {
+
+        ArrayList items = new ArrayList();
+        AssessmentObject item = null;
+
+        //Lay du lieu vao database,
+        int at = (page - 1) * total;
+
+        ResultSet rs = this.a.getAssessments(similar, at, total);
+        if (rs != null) {
+            try {
+                while (rs.next()) {
+                    item = new AssessmentObject();
+                    item.setAsssessment_id(rs.getInt("assessment_id"));
+                    item.setAssessment_name(rs.getString("assessment_name"));
+                    item.setAssessment_enable(rs.getBoolean("assessment_creator"));
+                    item.setAssessment_type(rs.getByte("assessment_last_updated_at"));
+
+                    items.add(item);
+
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        return items;
+    }
+
+
+}

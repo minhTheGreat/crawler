@@ -1,0 +1,148 @@
+package jsoft.ads.article;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.io.*;
+import java.util.*;
+
+import jsoft.objects.*;
+import jsoft.*;
+import jsoft.ads.category.CategoryControl;
+import jsoft.objects.CategoryObject;
+import jsoft.ads.article.ArticleControl;
+import jsoft.library.Utilities;
+import org.jsoup.select.Elements;
+import org.jsoup.nodes.Element;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import jsoft.ads.source.SourceControl;
+import jsoft.ads.source.SourceModel;
+
+/**
+ * <p>Title: </p>
+ *
+ * <p>Description: </p>
+ *
+ * <p>Copyright: Copyright (c) 2018</p>
+ *
+ * <p>Company: </p>
+ *
+ * @author not attributable
+ * @version 1.0
+ */
+public class ArticleGetNew extends HttpServlet {
+    private static final String CONTENT_TYPE = "text/html; charset=utf-8";
+    private static SourceModel sm;
+
+    //Initialize global variables
+    public void init() throws ServletException {
+    }
+
+    //Process the HTTP Get request
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws
+            ServletException, IOException {
+        response.setContentType(CONTENT_TYPE);
+        PrintWriter out = response.getWriter();
+        //tim thong tin dang nhap he thong
+        UserObject user = (UserObject) request.getSession().getAttribute(
+                "userLogined");
+
+        //Kiem tra
+        if (user == null) {
+            response.sendRedirect("/adv/user/login");
+        }
+    }
+
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws
+            ServletException, IOException {
+        doGet(request, response);
+        request.setCharacterEncoding("utf-8");
+
+        UserObject user = (UserObject) request.getSession().getAttribute(
+                "userLogined");
+        //Kiem tra
+        if (user == null) {
+            response.sendRedirect("/adv/user/login");
+        } else {
+            //Tim bo quan li ket noi
+            ConnectionPool cp = (ConnectionPool) getServletContext().
+                                getAttribute("CPool");
+
+            //Tao doi tuong thuc thi chuc n\u0103ng
+            CategoryControl cc = new CategoryControl(cp);
+            if (cp == null) {
+                getServletContext().setAttribute("CPool", cc.getCP());
+            }
+
+            ArrayList<CategoryObject>
+                    categories = cc.getCategoryObjects(null, 1, 999);
+
+            cc.releaseCon();
+
+            String url;
+            Document document;
+            ArticleControl ac = new ArticleControl(cp);
+            ArticleObject nArticle;
+            if (cp == null) {
+                getServletContext().setAttribute("CPool", ac.getCP());
+            }
+            int i=0;
+            Elements articles;
+            for (CategoryObject category : categories) {
+                if (!category.isSource_enable() && !category.isCategory_enable()) {
+                    i++;
+                    continue;
+                }
+//                url = category.getCategory_link();
+//
+//                document = Jsoup.connect(url).
+//                           validateTLSCertificates(false).
+//                           followRedirects(false).timeout(60000).get();
+//                articles = document.select(".list_news");
+//
+//                if (articles.size() > 0) {
+//                    i = 0;
+//
+//                    for (Element article : articles) {
+////                        if (i > 5) {
+////                            continue;
+////                        }
+//                        nArticle = new ArticleObject();
+//                        i++;
+//                        nArticle.setArticle_title(
+//                                Utilities.
+//                                encode(article.select(
+//                                        ".title_news a").first().
+//                                       html()));
+//                        nArticle.setArticle_description(
+//                                Utilities.encode(article.
+//                                                 select(
+//                                ".description").html()));
+//                        nArticle.setArticle_image(article.
+//                                                  select(".thumb_art img").
+//                                                  attr(
+//                                "src"));
+//                        nArticle.setArticle_link(article.
+//                                                 select(".title_news a").
+//                                                 first().
+//                                                 attr("href"));
+//                        nArticle.setArticle_category_id(
+//                                category.getCategory_id());
+//                        nArticle.setArticle_enable(true);
+//                        nArticle.setArticle_created_at((new
+//                                Date()).toString());
+//
+//                        ac.addArticle(nArticle);
+//                    }
+//                }
+            }
+            ac.releaseCon();
+            response.sendRedirect("/adv/article/view?t");
+        }
+    }
+
+    //Clean up resources
+    public void destroy() {
+    }
+
+}

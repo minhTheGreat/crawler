@@ -1,0 +1,124 @@
+package jsoft.ads.source_category;
+
+import java.sql.*;
+
+import jsoft.ConnectionPool;
+import jsoft.objects.*;
+import jsoft.ads.category.*;
+
+public class Source_categoryImpl implements Source_category {
+    public Source_categoryImpl() {
+    }
+
+    /**
+     * addSource_category
+     *
+     * @param item Source_categoryObject
+     * @return boolean
+     * @todo Implement this jsoft.ads.source_category.Source_category method
+     */
+    public boolean addSource_category(Source_categoryObject item) {
+
+       String sql = "INSERT INTO tblsource_category( ";
+
+       sql += "sc_source_id,  ";
+       sql += "sc_category_id, sc_link,  ";
+       sql += "sc_creator, sc_enable, )";
+       sql += "sc_priority)";
+
+       sql += "VALUES(?,?,?,?,?,?,?,?,?)";
+
+       try{
+       PreparedStatement pre = this.con.prepareStatement(sql);
+       //Truyen gia tri
+          pre.setString(1, item.getSource_name());
+          pre.setString(2, item.getSource_link());
+          pre.setInt(3, item.getSource_creator());
+          pre.setString(4, item.getSource_last_updated_at());
+          pre.setInt(5, item.getSource_last_updator());
+          pre.setBoolean(6, item.isSource_enable());
+          pre.setInt(7, item.getSource_assessment_id());
+          pre.setInt(8, item.getSource_assessment_creator());
+          pre.setString(9, item.getSource_html_selector());
+
+
+          //Tra ve ket qua
+          return this.add(pre);
+
+      } catch (SQLException ex) {
+          ex.printStackTrace();
+      }
+
+
+        return false;
+    }
+
+
+    /**
+     * delSource_category
+     *
+     * @param item Source_categoryObject
+     * @return boolean
+     * @todo Implement this jsoft.ads.source_category.Source_category method
+     */
+    public boolean delSource_category(Source_categoryObject item) {
+        return false;
+    }
+
+    /**
+     * editSource_category
+     *
+     * @param item Source_categoryObject
+     * @return boolean
+     * @todo Implement this jsoft.ads.source_category.Source_category method
+     */
+    public boolean editSource_category(Source_categoryObject item) {
+        return false;
+    }
+
+    /**
+     * getCP
+     *
+     * @return ConnectionPool
+     * @todo Implement this jsoft.ShareControl method
+     */
+    public ConnectionPool getCP() {
+        return null;
+    }
+
+    /**
+     * getSource_category
+     *
+     * @param id int
+     * @return ResultSet
+     * @todo Implement this jsoft.ads.source_category.Source_category method
+     */
+    public ResultSet getSource_category(int id) {
+        return null;
+    }
+
+    /**
+     * getSource_categorys
+     *
+     * @param similar Source_categoryObject
+     * @param at int
+     * @param total byte
+     * @return ResultSet
+     * @todo Implement this jsoft.ads.source_category.Source_category method
+     */
+    public ResultSet getSource_categorys(Source_categoryObject similar, int at,
+                                         byte total) {
+        return null;
+    }
+
+    /**
+     * releaseCon
+     *
+     * @todo Implement this jsoft.ShareControl method
+     */
+    public void releaseCon() {
+    }
+
+    public static void main(String[] args) {
+    }
+}

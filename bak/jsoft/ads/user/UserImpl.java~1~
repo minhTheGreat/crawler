@@ -1,0 +1,101 @@
+package jsoft.ads.user;
+
+import java.sql.ResultSet;
+
+import jsoft.ConnectionPool;
+import jsoft.objects.UserObject;
+
+public class UserImpl implements User {
+    public UserImpl() {
+    }
+
+    /**
+     * addUser
+     *
+     * @param item UserObject
+     * @return boolean
+     * @todo Implement this jsoft.ads.user.User method
+     */
+    public boolean addUser(UserObject item) {
+        return false;
+    }
+
+    /**
+     * delUser
+     *
+     * @param item UserObject
+     * @return boolean
+     * @todo Implement this jsoft.ads.user.User method
+     */
+    public boolean delUser(UserObject item) {
+        return false;
+    }
+
+    /**
+     * editUser
+     *
+     * @param item UserObject
+     * @return boolean
+     * @todo Implement this jsoft.ads.user.User method
+     */
+    public boolean editUser(UserObject item) {
+        return false;
+    }
+
+    /**
+     * getCP
+     *
+     * @return ConnectionPool
+     * @todo Implement this jsoft.ShareControl method
+     */
+    public ConnectionPool getCP() {
+        return null;
+    }
+
+    /**
+     * getUser
+     *
+     * @param id int
+     * @return ResultSet
+     * @todo Implement this jsoft.ads.user.User method
+     */
+    public ResultSet getUser(int id) {
+        return null;
+    }
+
+    /**
+     * getUser
+     *
+     * @param username String
+     * @param userpass String
+     * @return ResultSet
+     * @todo Implement this jsoft.ads.user.User method
+     */
+    public ResultSet getUser(String username, String userpass) {
+        return null;
+    }
+
+    /**
+     * getUsers
+     *
+     * @param similar UserObject
+     * @param at int
+     * @param total byte
+     * @return ResultSet
+     * @todo Implement this jsoft.ads.user.User method
+     */
+    public ResultSet getUsers(UserObject similar, int at, byte total) {
+        return null;
+    }
+
+    /**
+     * releaseCon
+     *
+     * @todo Implement this jsoft.ShareControl method
+     */
+    public void releaseCon() {
+    }
+
+    public static void main(String[] args) {
+    }
+}

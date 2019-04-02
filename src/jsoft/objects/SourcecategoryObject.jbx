@@ -1,0 +1,13 @@
+[PropertyInfo]
+sc_id,int,false,false,sc_id,sc_id,true,<default>
+sc_source_id,int,false,false,sc_source_id,sc_source_id,true,<default>
+sc_category_id,int,false,false,sc_category_id,sc_category_id,true,<default>
+sc_link,String,false,false,sc_link,sc_link,true,<default>
+sc_creator,int,false,false,sc_creator,sc_creator,true,<default>
+sc_enable,boolean,false,false,sc_enable,sc_enable,true,<default>
+sc_priority,int,false,false,sc_priority,sc_priority,true,<default>
+[IconNames]
+
+
+
+

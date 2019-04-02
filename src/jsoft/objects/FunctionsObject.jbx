@@ -1,0 +1,9 @@
+[PropertyInfo]
+function_id,int,false,false,function_id,function_id,true,<default>
+function_name,String,false,false,function_name,function_name,true,<default>
+function_action,String,false,false,function_action,function_action,true,<default>
+[IconNames]
+
+
+
+

@@ -1,0 +1,42 @@
+package jsoft.objects;
+
+public class Assessment_rulesObject {
+    private int ar_id;
+    private String ar_name;
+    private boolean ar_enable;
+    private int ar_point;
+    public Assessment_rulesObject() {
+    }
+
+    public void setAr_id(int ar_id) {
+        this.ar_id = ar_id;
+    }
+
+    public void setAr_name(String ar_name) {
+        this.ar_name = ar_name;
+    }
+
+    public void setAr_enable(boolean ar_enable) {
+        this.ar_enable = ar_enable;
+    }
+
+    public void setAr_point(int ar_point) {
+        this.ar_point = ar_point;
+    }
+
+    public int getAr_id() {
+        return ar_id;
+    }
+
+    public String getAr_name() {
+        return ar_name;
+    }
+
+    public boolean isAr_enable() {
+        return ar_enable;
+    }
+
+    public int getAr_point() {
+        return ar_point;
+    }
+}

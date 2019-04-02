@@ -1,0 +1,73 @@
+package jsoft.objects;
+
+public class SourcecategoryObject {
+    private int sc_id;
+    private int sc_source_id;
+    private int sc_category_id;
+    private String sc_link;
+    private int sc_creator;
+    private boolean sc_enable;
+    private int sc_priority;
+    public SourcecategoryObject() {
+    }
+
+    public static void main(String[] args) {
+        SourcecategoryObject sourcecategoryobject = new SourcecategoryObject();
+    }
+
+    public void setSc_id(int sc_id) {
+        this.sc_id = sc_id;
+    }
+
+    public void setSc_source_id(int sc_source_id) {
+        this.sc_source_id = sc_source_id;
+    }
+
+    public void setSc_category_id(int sc_category_id) {
+        this.sc_category_id = sc_category_id;
+    }
+
+    public void setSc_link(String sc_link) {
+        this.sc_link = sc_link;
+    }
+
+    public void setSc_creator(int sc_creator) {
+        this.sc_creator = sc_creator;
+    }
+
+    public void setSc_enable(boolean sc_enable) {
+        this.sc_enable = sc_enable;
+    }
+
+    public void setSc_priority(int sc_priority) {
+        this.sc_priority = sc_priority;
+    }
+
+    public int getSc_id() {
+        return sc_id;
+    }
+
+    public int getSc_source_id() {
+        return sc_source_id;
+    }
+
+    public int getSc_category_id() {
+        return sc_category_id;
+    }
+
+    public String getSc_link() {
+        return sc_link;
+    }
+
+    public int getSc_creator() {
+        return sc_creator;
+    }
+
+    public boolean isSc_enable() {
+        return sc_enable;
+    }
+
+    public int getSc_priority() {
+        return sc_priority;
+    }
+}

@@ -1,0 +1,67 @@
+package jsoft.ads.article;
+
+import java.util.*;
+import jsoft.objects.*;
+
+/**
+ * <p>Title: JP1707 Project</p>
+ *
+ * <p>Description: </p>
+ *
+ * <p>Copyright: Copyright (c) 2018</p>
+ *
+ * <p>Company: </p>
+ *
+ * @author TrungHieu
+ * @version 1.0
+ */
+public class ArticleLibrary {
+    public ArticleLibrary() {
+    }
+
+    //Xu li danh sach ng sd theo cau truc HTML
+    public static String viewArticles(ArrayList<ArticleObject> items) {
+        String tmp ="<select>";
+        tmp += "<optrion><a href='view?page=1'>Trang 1</a></option>";
+        tmp += "<optrion><a href='view?page=1'>Trang 1</a></option>";
+        tmp += "<optrion><a href='view?page=1'>Trang 1</a></option>";
+        tmp += "<optrion><a href='view?page=1'>Trang 1</a></option>";
+        tmp += "</select>";
+
+        tmp = "<table id=\"bootstrap-data-table\" class=\"table table-striped table-bordered\">";
+        tmp += "<thead>";
+        tmp += "<tr>";
+        tmp += "<th>STT</th>";
+        tmp += "<th style=\"min-width: 151px\">Tiêu \u0111\u1EC1</th>";
+        tmp += "<th>Chuyên m\u1EE5c</th>";
+        tmp += "<th>Ngu\u1ED3n tin</th>";
+        tmp += "<th>Tr\u1EA1ng thái</th>";
+        tmp += "<th>Th\u1EF1c hi\u1EC7n</th>";
+        tmp += "</tr>";
+        tmp += "</thead>";
+        tmp += "<tbody>";
+        int NO = 0;
+        for (ArticleObject item : items) {
+            tmp += "<tr>";
+            tmp += "<td >"+ (++NO) + "</td>";
+
+            tmp += "<td>" + item.getArticle_title() + "</td>";
+            tmp += "<td>" + item.getCategory_name() + "</td>";
+            tmp += "<td>" + item.getSource_name() + "</td>";
+            if(item.isSource_enable() && item.isCategory_enable() && item.isArticle_enable()){
+                tmp += "<td><div class=\"alert alert-success\"><a href='enable?id="+item.getArticle_id()+"' class=\"cate-enable alert-link\">S\u1EED d\u1EE5ng</a></div></td>";
+            } else {
+                tmp += "<td><div class=\"alert alert-danger\"><a href='enable?id="+item.getArticle_id()+"' class=\"cate-enable alert-link\">Không s\u1EED d\u1EE5ng</a></div></td>";
+            }
+            tmp += "<td><a href=\"edit.html\"><i class=\"fa fa-edit\" style=\"color: blue\"></i></a>";
+            tmp += "<a href=\"#\"><i class=\"fa fa-times-circle pull-right\" style=\"color: red\"></i></a></td>";
+
+            tmp += "</tr>";
+
+        }
+        tmp += "</tbody>";
+        tmp += "</table>";
+
+        return tmp;
+    }
+}

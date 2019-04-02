@@ -1,0 +1,362 @@
+package jsoft.ads.category;
+
+import jsoft.ConnectionPool;
+import jsoft.objects.*;
+import java.util.*;
+import java.sql.*;
+
+/**
+ * <p>Title: JP1707 Project</p>
+ *
+ * <p>Description: </p>
+ *
+ * <p>Copyright: Copyright (c) 2018</p>
+ *
+ * <p>Company: </p>
+ *
+ * @author TrungHieu
+ * @version 1.0
+ */
+public class CategoryModel {
+
+    private Category c;
+
+    public CategoryModel(ConnectionPool cp) {
+        this.c = new CategoryImpl(cp, "Category");
+    }
+
+    protected void finallize() throws Throwable {
+        this.c = null;
+        super.finalize();
+    }
+
+    public ConnectionPool getCP() {
+        return this.c.getCP();
+    }
+
+    public void releaseCon() {
+        this.c.releaseCon();
+    }
+
+
+    //----------------------------------------------------
+
+    public boolean addCategory(CategoryObject item) {
+        return this.c.addCategory(item);
+    }
+
+    public boolean editCategory(CategoryObject item) {
+        return this.c.editCategory(item);
+    }
+
+    public boolean delCategory(CategoryObject item) {
+        return this.c.delCategory(item);
+    }
+
+    //----------------------------------------------------
+    public CategoryObject getCategoryObject(int id) {
+        Framework_assessmentObject item = null;
+
+        //Lay du lieu vao database,
+        ResultSet rs = this.c.getCategory(id);
+        if (rs != null) {
+            try {
+                if (rs.next()) {
+                    item = new Framework_assessmentObject();
+                    item.setCategory_id(rs.getInt("category_id"));
+                    item.setCategory_name(rs.getString("category_name"));
+                    item.setCategory_enable(rs.getBoolean("category_enable"));
+                    item.setCategory_source_id(rs.getInt("category_source_id"));
+                    item.setCategory_link(rs.getString("category_link"));
+                    item.setCategory_assessment_id(rs.getInt(
+                            "category_assessment_id"));
+                    item.setCategory_assessment_creator_id(rs.getInt(
+                            "category_assessment_creator_id"));
+                    item.setCategory_assessment_creator_name(rs.getString(
+                            "category_assessment_creator_name"));
+                    item.setCategory_created_at(rs.getString(
+                            "category_created_at"));
+                    item.setCategory_creator_id(rs.getInt("category_creator_id"));
+                    item.setCategory_creator_name(rs.getString(
+                            "category_creator_name"));
+                    item.setCategory_last_updated_at(rs.getString(
+                            "category_last_updated_at"));
+                    item.setCategory_last_updator_name(rs.getString(
+                            "category_last_updator_name"));
+                    item.setCategory_last_updator_id(rs.getInt(
+                            "category_last_updator_id"));
+
+                    item.setSource_name(rs.getString("source_name"));
+                }
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        return item;
+    }
+
+    public CategoryObject getCategoryObject(String name) {
+        Framework_assessmentObject item = null;
+
+        //Lay du lieu vao database,
+        ResultSet rs = this.c.getCategory(name);
+        if (rs != null) {
+            try {
+                if (rs.next()) {
+                    item = new Framework_assessmentObject();
+                    item.setCategory_id(rs.getInt("category_id"));
+                    item.setCategory_name(rs.getString("category_name"));
+                    item.setCategory_enable(rs.getBoolean("category_enable"));
+                    item.setCategory_source_id(rs.getInt("category_source_id"));
+                    item.setCategory_link(rs.getString("category_link"));
+                    item.setCategory_assessment_id(rs.getInt(
+                            "category_assessment_id"));
+                    item.setCategory_assessment_creator_id(rs.getInt(
+                            "category_assessment_creator_id"));
+                    item.setCategory_assessment_creator_name(rs.getString(
+                            "category_assessment_creator_name"));
+                    item.setCategory_created_at(rs.getString(
+                            "category_created_at"));
+                    item.setCategory_creator_id(rs.getInt("category_creator_id"));
+                    item.setCategory_creator_name(rs.getString(
+                            "category_creator_name"));
+                    item.setCategory_last_updated_at(rs.getString(
+                            "category_last_updated_at"));
+                    item.setCategory_last_updator_name(rs.getString(
+                            "category_last_updator_name"));
+                    item.setCategory_last_updator_id(rs.getInt(
+                            "category_last_updator_id"));
+
+                    item.setSource_name(rs.getString("source_name"));
+                }
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        return item;
+    }
+
+
+    public ArrayList<CategoryObject> getCategoryObjects(CategoryObject similar,
+            int page,
+            int total) {
+
+        ArrayList items = new ArrayList();
+        CategoryObject item = null;
+
+        //Lay du lieu vao database,
+        int at = (page - 1) * total;
+
+        ResultSet rs = this.c.getCategorys(similar, at, total);
+        if (rs != null) {
+            try {
+                while (rs.next()) {
+                    item = new CategoryObject();
+                    item.setCategory_id(rs.getInt("category_id"));
+                    item.setCategory_name(rs.getString("category_name"));
+                    item.setCategory_enable(rs.getBoolean("category_enable"));
+                    item.setCategory_source_id(rs.getInt("category_source_id"));
+                    item.setCategory_link(rs.getString("category_link"));
+                    item.setCategory_assessment_id(rs.getInt(
+                            "category_assessment_id"));
+                    item.setCategory_assessment_creator_id(rs.getInt(
+                            "category_assessment_creator_id"));
+                    item.setCategory_assessment_creator_name(rs.getString(
+                            "category_assessment_creator_name"));
+                    item.setCategory_created_at(rs.getString(
+                            "category_created_at"));
+                    item.setCategory_creator_id(rs.getInt("category_creator_id"));
+                    item.setCategory_creator_name(rs.getString(
+                            "category_creator_name"));
+                    item.setCategory_last_updated_at(rs.getString(
+                            "category_last_updated_at"));
+                    item.setCategory_last_updator_name(rs.getString(
+                            "category_last_updator_name"));
+                    item.setCategory_last_updator_id(rs.getInt(
+                            "category_last_updator_id"));
+
+                    item.setCategory_assessment_id(rs.getInt(
+                            "category_assessment_id"));
+                    item.setSource_name(rs.getString("source_name"));
+                    item.setSource_link(rs.getString("source_link"));
+                    item.setSource_enable(rs.getBoolean("source_enable"));
+
+                    items.add(item);
+
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        return items;
+    }
+
+    public ArrayList<CategoryObject> getCategoryObjects2(CategoryObject similar,
+            int page,
+            int total) {
+
+        ArrayList items = new ArrayList();
+        CategoryObject item = null;
+
+        //Lay du lieu vao database,
+        int at = (page - 1) * total;
+
+        ResultSet rs = this.c.getCategorys2(similar, at, total);
+        if (rs != null) {
+            try {
+                while (rs.next()) {
+                    item = new CategoryObject();
+                    item.setCategory_id(rs.getInt("category_id"));
+                    item.setCategory_name(rs.getString("category_name"));
+                    item.setCategory_enable(rs.getBoolean("category_enable"));
+                    item.setCategory_source_id(rs.getInt("category_source_id"));
+                    item.setCategory_link(rs.getString("category_link"));
+                    item.setCategory_assessment_id(rs.getInt(
+                            "category_assessment_id"));
+                    item.setCategory_assessment_creator_id(rs.getInt(
+                            "category_assessment_creator_id"));
+                    item.setCategory_assessment_creator_name(rs.getString(
+                            "category_assessment_creator_name"));
+                    item.setCategory_created_at(rs.getString(
+                            "category_created_at"));
+                    item.setCategory_creator_id(rs.getInt("category_creator_id"));
+                    item.setCategory_creator_name(rs.getString(
+                            "category_creator_name"));
+                    item.setCategory_last_updated_at(rs.getString(
+                            "category_last_updated_at"));
+                    item.setCategory_last_updator_name(rs.getString(
+                            "category_last_updator_name"));
+                    item.setCategory_last_updator_id(rs.getInt(
+                            "category_last_updator_id"));
+
+                    item.setCategory_assessment_id(rs.getInt(
+                            "category_assessment_id"));
+                    item.setSource_name(rs.getString("source_name"));
+                    item.setSource_link(rs.getString("source_link"));
+                    item.setSource_enable(rs.getBoolean("source_enable"));
+
+                    items.add(item);
+
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        return items;
+    }
+
+    public String enableCategory(int id) {
+        CategoryObject item = new CategoryObject(); ;
+        ResultSet rs = this.c.getCategory(id);
+
+        if (rs != null) {
+            try {
+                if (rs.next()) {
+                    item.setCategory_id(rs.getInt("category_id"));
+                    item.setCategory_name(rs.getString("category_name"));
+                    item.setCategory_enable(rs.getBoolean("category_enable"));
+                    item.setCategory_source_id(rs.getInt("category_source_id"));
+                    item.setCategory_link(rs.getString("category_link"));
+                    item.setCategory_assessment_id(rs.getInt(
+                            "category_assessment_id"));
+                    item.setCategory_assessment_creator_id(rs.getInt(
+                            "category_assessment_creator_id"));
+                    item.setCategory_assessment_creator_name(rs.getString(
+                            "category_assessment_creator_name"));
+                    item.setCategory_created_at(rs.getString(
+                            "category_created_at"));
+                    item.setCategory_creator_id(rs.getInt("category_creator_id"));
+                    item.setCategory_creator_name(rs.getString(
+                            "category_creator_name"));
+                    item.setCategory_last_updated_at(rs.getString(
+                            "category_last_updated_at"));
+                    item.setCategory_last_updator_name(rs.getString(
+                            "category_last_updator_name"));
+                    item.setCategory_last_updator_id(rs.getInt(
+                            "category_last_updator_id"));
+                    item.setSource_enable(rs.getBoolean("source_enable"));
+                }
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        boolean cate_status = item.isCategory_enable();
+        boolean source_status = item.isSource_enable();
+        String result = "fail";
+        if (cate_status) {
+            if (source_status) {
+                item.setCategory_enable(false);
+                if (this.c.enable(item)) {
+                    result = "unenable";
+                }
+            } else {
+                item.setCategory_enable(true);
+                if (this.c.enable(item)) {
+                    result = "enable";
+                }
+            }
+        } else {
+            item.setCategory_enable(true);
+            if (this.c.enable(item)) {
+                result = "enable";
+            }
+        }
+        return result;
+    }
+
+    public ArrayList<CategoryObject> getCategoryObjectsBySource(int id) {
+        ArrayList items = new ArrayList();
+        CategoryObject item = null;
+
+        ResultSet rs = this.c.getCategorysBySource(similar, at, total);
+        if (rs != null) {
+            try {
+                while (rs.next()) {
+                    item = new CategoryObject();
+                    item.setCategory_id(rs.getInt("category_id"));
+                    item.setCategory_name(rs.getString("category_name"));
+                    item.setCategory_enable(rs.getBoolean("category_enable"));
+                    item.setCategory_source_id(rs.getInt("category_source_id"));
+                    item.setCategory_link(rs.getString("category_link"));
+                    item.setCategory_assessment_id(rs.getInt(
+                            "category_assessment_id"));
+                    item.setCategory_assessment_creator_id(rs.getInt(
+                            "category_assessment_creator_id"));
+                    item.setCategory_assessment_creator_name(rs.getString(
+                            "category_assessment_creator_name"));
+                    item.setCategory_created_at(rs.getString(
+                            "category_created_at"));
+                    item.setCategory_creator_id(rs.getInt("category_creator_id"));
+                    item.setCategory_creator_name(rs.getString(
+                            "category_creator_name"));
+                    item.setCategory_last_updated_at(rs.getString(
+                            "category_last_updated_at"));
+                    item.setCategory_last_updator_name(rs.getString(
+                            "category_last_updator_name"));
+                    item.setCategory_last_updator_id(rs.getInt(
+                            "category_last_updator_id"));
+
+                    item.setCategory_assessment_id(rs.getInt(
+                            "category_assessment_id"));
+                    item.setSource_name(rs.getString("source_name"));
+                    item.setSource_link(rs.getString("source_link"));
+                    item.setSource_enable(rs.getBoolean("source_enable"));
+
+                    items.add(item);
+
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        return items;
+    }
+}

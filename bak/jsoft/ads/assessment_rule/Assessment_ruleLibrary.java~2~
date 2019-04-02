@@ -1,0 +1,50 @@
+package jsoft.ads.assessment_rule;
+
+import java.util.*;
+import jsoft.objects.*;
+
+/**
+ * <p>Title: JP1707 Project</p>
+ *
+ * <p>Description: </p>
+ *
+ * <p>Copyright: Copyright (c) 2018</p>
+ *
+ * <p>Company: </p>
+ *
+ * @author TrungHieu
+ * @version 1.0
+ */
+public class Assessment_ruleLibrary {
+    public Assessment_ruleLibrary() {
+    }
+
+    //Xu li danh sach ng sd theo cau truc HTML
+    public static String viewAssessment_rules(ArrayList<Assessment_ruleObject> items) {
+
+        String tmp = "<table id=\"bootstrap-data-table\" class=\"table table-striped table-bordered\">";
+        //tmp += "<tr><th>STT</th>";
+        tmp += "<th>Tên ng\u01B0\u1EDDi dùng</th>";
+        tmp += "<th>Email</th>";
+        tmp += "<th>S\u0110T</th>";
+        tmp += "<th>Vai trò</th>";
+        tmp += "<th>Tr\u1EA1ng thái</th></tr>";
+
+        int NO=0;
+        for (Assessment_ruleObject item : items) {
+
+
+
+            tmp += "</tr>";
+
+        }
+        tmp += "</table>";
+
+        return tmp;
+    }
+
+
+    public static void main(String[] args) {
+
+    }
+}

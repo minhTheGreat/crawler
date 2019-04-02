@@ -1,0 +1,54 @@
+package jsoft.ads.user_log;
+
+import jsoft.*;
+import jsoft.objects.*;
+
+import java.util.*;
+
+/**
+ * <p>Title: JP1707 Project</p>
+ *
+ * <p>Description: </p>
+ *
+ * <p>Copyright: Copyright (c) 2018</p>
+ *
+ * <p>Company: </p>
+ *
+ * @author TrungHieu
+ * @version 1.0
+ */
+public class UserLogController {
+
+    private UserLogModel am;
+
+
+    public UserLogController(ConnectionPool cp) {
+        this.am = new UserLogModel(cp);
+    }
+
+    protected void finalize() throws Throwable {
+        this.am = null;
+        super.finalize();
+    }
+
+    public ConnectionPool getCP() {
+        return this.am.getCP();
+    }
+
+    public void releaseCon() {
+        this.am.releaseCon();
+    }
+
+
+    //-----------------------------------------
+
+    public boolean addUser_log(User_logObject item) {
+        return this.am.addUser_log(item);
+    }
+
+    //-----------------------------------------
+    public ArrayList<User_logObject> getUser_logObjects(User_logObject similar, int page, int total) {
+        return this.cm.getCategoryObjects(similar, page, total);
+    }
+
+}

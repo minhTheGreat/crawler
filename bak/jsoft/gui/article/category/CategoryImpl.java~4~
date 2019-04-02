@@ -1,0 +1,75 @@
+package jsoft.gui.article.category;
+
+import jsoft.objects.CategoryObject;
+import java.sql.*;
+import jsoft.objects.*;
+
+import jsoft.ads.source.*;
+import jsoft.*;
+
+
+public class CategoryImpl extends SourceImpl implements Category {
+    public CategoryImpl(ConnectionPool cp, String objectName) {
+        super(cp, objectName);
+    }
+
+
+    public ResultSet getCategory(int id) {
+        String sql = "SELECT * FROM tblframework_assessment ";
+        //sql += "LEFT JOIN tblsource ON category_source_id = source_id ";
+
+        sql += "WHERE fa_article_id=?";
+
+        return this.get(sql, id);
+    }
+
+    /**
+     * getCategorys
+     *
+     * @param similar CategoryObject
+     * @param at int
+     * @param total byte
+     * @return ResultSet
+     * @todo Implement this jsoft.ads.category.Category method
+     */
+    public ResultSet getCategorys(CategoryObject similar, int at, byte total) {
+        String sql = "SELECT * FROM tblframework_assessment ";
+        //sql += "LEFT JOIN tblsource ON category_source_id = source_id ";
+        sql += "LEFT JOIN tblarticle ON fa_article_id=article_id ";
+        sql += "LEFT JOIN tblcategory ON article_category_id=category_id ";
+        sql += "LEFT JOIN tblsource ON category_source_id=source_id ";
+
+        sql += "ORDER BY category_name ASC ";
+        sql += "LIMIT "+at+", "+total;
+
+        return this.gets(sql);
+
+    }
+    public ResultSet getCategories(CategoryObject similar,int at, byte total){
+        String sql ="SELECT * FROM tblcategory ";
+        sql +="LEFT JOIN category_name ASC ";
+        sql +="ORDER BY category_name ASC ";
+        return this.gets(sql);
+    }
+
+    /**
+     * releaseCon
+     *
+     * @todo Implement this jsoft.ShareControl method
+     */
+    public void releaseCon() {
+    }
+
+    public static void main(String[] args) {
+
+        //Tao bo quan li ket noi
+        ConnectionPool cp = new ConnectionPoolImpl();
+
+        //Tao doi tuong thuc thi chuc nang
+        Category c = new CategoryImpl(cp, "Category");
+
+        //Lay danh sach ban ghi nguoi su dung
+        ResultSet rs = c.getCategorys(null, 0, (byte)15);
+
+    }
+}

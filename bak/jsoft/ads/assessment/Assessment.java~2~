@@ -1,0 +1,6 @@
+package jsoft.ads.assessment;
+
+
+
+public interface Assessment {
+}

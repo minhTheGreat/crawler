@@ -1,0 +1,10 @@
+[PropertyInfo]
+ar_id,int,false,false,ar_id,ar_id,true,<default>
+ar_name,String,false,false,ar_name,ar_name,true,<default>
+ar_enable,boolean,false,false,ar_enable,ar_enable,true,<default>
+ar_point,int,false,false,ar_point,ar_point,true,<default>
+[IconNames]
+
+
+
+

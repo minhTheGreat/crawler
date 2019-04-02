@@ -1,0 +1,214 @@
+<%@page language="java" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
+<%@page import="jsoft.*, jsoft.objects.*"%>
+<%@page import="jsoft.gui.article.category.* "%>
+<%@page import="jsoft.gui.article.* "%>
+<%@page import="jsoft.ads.user_log.* "%>
+<%@page import="jsoft.library.Utilities.* "%>
+<%@page import="java.util.* "%>
+<%
+  String uri = request.getRequestURI().substring(6);
+  int at = -1, NO = 1;
+  if (!uri.equalsIgnoreCase("")) {
+    at = uri.indexOf('/');
+  }
+  String pos = "";
+  if (at != -1) {
+    pos = uri.substring(0, at);
+  }
+  //Tim vi tri / de phat hien co phai trang chu k
+  //Tim bo quan li ket noi
+  ConnectionPool cp = (ConnectionPool) application.getAttribute("CPool");
+  //Tao doi tuong thuc thi chuc nang
+  ArticleControl ac = new ArticleControl(cp);
+  CategoryControl cc = new CategoryControl(cp);
+  UserLogController ulc = new UserLogController(cp);
+  if (cp == null) {
+    application.setAttribute("CPool", ac.getCP());
+  }
+  //Tao doi tuong bo loc
+  ArticleObject similar = new ArticleObject();
+  CategoryObject c_similar = new CategoryObject();
+  ArrayList<CategoryObject> items = cc.getCateObjects(c_similar, 1, (byte) 6);
+  int size = items.size();
+  //Tin tuc
+  similar.setArticle_category_id(items.get(1).getCategory_id());
+  similar.setArticle_enable(true);
+  //Lay lfocus
+  String lfocus = ac.viewFocus(similar, (byte) 2);
+  //Dua cau truc nay vao
+  session.setAttribute("lfocus", lfocus);
+  //Lay cau truc tin tuc noi bat
+  similar.setArticle_category_id(items.get(2).getCategory_id());
+  String intros = ac.viewIntros(similar, (byte) 3);
+  session.setAttribute("intros", intros);
+  //RFocus
+  similar.setArticle_category_id(items.get(3).getCategory_id());
+  String rfocus = ac.viewFocus2(similar, (byte) 2);
+  session.setAttribute("rfocus", rfocus);
+  //lview
+  similar.setArticle_category_id(items.get(4).getCategory_id());
+  String lView = ac.viewSections(similar, (byte) 5, "Thoi-su");
+  session.setAttribute("lView", lView);
+  similar.setArticle_category_id(items.get(5).getCategory_id());
+  String lView2 = ac.viewSections(similar, (byte) 5, "Kinh-doanh");
+  session.setAttribute("lView2", lView2);
+  //blview
+  similar.setArticle_category_id(items.get(6).getCategory_id());
+  String blView = ac.viewBlView(similar, (byte) 5, "Giao-duc");
+  session.setAttribute("blView", blView);
+  //brview
+  similar.setArticle_category_id(items.get(7).getCategory_id());
+  String brView = ac.viewBrView(similar, (byte) 3, "The-thao");
+  session.setAttribute("brView", brView);
+  //rView
+  similar.setArticle_category_id(items.get(8).getCategory_id());
+  String rView = ac.viewRView(similar, (byte) 5, "Tin-tuc");
+  session.setAttribute("rView", rView);
+  //--------------------------------***----------------------------------//
+  int pages=1;
+  if(request.getParameter("pages")!=null){
+    pages = Integer.parseInt(request.getParameter("pages"));
+  }
+  if (pos.equalsIgnoreCase("the-thao") && size > 9) {
+    //the-thao
+    similar.setArticle_category_id(items.get(9).getCategory_id());
+    String archive = ac.viewArchive(similar,  pages, (byte) 6);
+    session.setAttribute("archive", archive);
+    lfocus = ac.viewFocus(similar,(byte) 2);
+    rfocus = ac.viewFocus2(similar,(byte)2);
+    intros = ac.viewIntros(similar,(byte)2);
+    rView = ac.viewRView(similar,(byte)5,"");
+    session.setAttribute("lfocus",lfocus);
+    session.setAttribute("rfocus",rfocus);
+    session.setAttribute("intros",intros);
+    session.setAttribute("rView",rView);
+  }
+  if (pos.equalsIgnoreCase("thoi-su") && size > 10) {
+    //thoi-su
+    similar.setArticle_category_id(items.get(10).getCategory_id());
+    String archive_news = ac.viewArchive(similar, pages, (byte) 6);
+    session.setAttribute("archive_news", archive_news);
+    lfocus = ac.viewFocus(similar,(byte) 2);
+    rfocus = ac.viewFocus2(similar,(byte)2);
+    intros = ac.viewIntros(similar,(byte)2);
+    rView = ac.viewRView(similar,(byte)5,"");
+    session.setAttribute("lfocus",lfocus);
+    session.setAttribute("rfocus",rfocus);
+    session.setAttribute("intros",intros);
+    session.setAttribute("rView",rView);
+  }
+  if (pos.equalsIgnoreCase("kinh-te") ) {
+    //Kinh te
+    similar.setArticle_category_id(230);
+    String archive_finance = ac.viewArchive(similar,  pages, (byte) 6);
+    session.setAttribute("archive_finance", archive_finance);
+    lfocus = ac.viewFocus(similar,(byte) 2);
+    rfocus = ac.viewFocus2(similar,(byte)2);
+    intros = ac.viewIntros(similar,(byte)2);
+    rView = ac.viewRView(similar,(byte)5,"");
+    session.setAttribute("lfocus",lfocus);
+    session.setAttribute("rfocus",rfocus);
+    session.setAttribute("intros",intros);
+    session.setAttribute("rView",rView);
+  }
+  if (pos.equalsIgnoreCase("giai-tri") && size > 12) {
+    //Giai tri
+    similar.setArticle_category_id(items.get(12).getCategory_id());
+    String archive_entertain = ac.viewArchive(similar, pages, (byte) 6);
+    session.setAttribute("archive_entertain", archive_entertain);
+    lfocus = ac.viewFocus(similar,(byte) 2);
+    rfocus = ac.viewFocus2(similar,(byte)2);
+    intros = ac.viewIntros(similar,(byte)2);
+    rView = ac.viewRView(similar,(byte)5,"");
+    session.setAttribute("lfocus",lfocus);
+    session.setAttribute("rfocus",rfocus);
+    session.setAttribute("intros",intros);
+    session.setAttribute("rView",rView);
+  }
+  if (pos.equalsIgnoreCase("suc-khoe") && size > 13) {
+    //Suc khoe
+    similar.setArticle_category_id(items.get(13).getCategory_id());
+    String archive_health = ac.viewArchive(similar,  pages, (byte) 6);
+    session.setAttribute("archive_health", archive_health);
+    lfocus = ac.viewFocus(similar,(byte) 2);
+    rfocus = ac.viewFocus2(similar,(byte)2);
+    intros = ac.viewIntros(similar,(byte)2);
+    rView = ac.viewRView(similar,(byte)5,"");
+    session.setAttribute("lfocus",lfocus);
+    session.setAttribute("rfocus",rfocus);
+    session.setAttribute("intros",intros);
+    session.setAttribute("rView",rView);
+  }
+  if (pos.equalsIgnoreCase("phap-luat") && size > 14) {
+    //Phap luat
+    similar.setArticle_category_id(items.get(14).getCategory_id());
+    String archive_law = ac.viewArchive(similar, pages, (byte) 6);
+    session.setAttribute("archive_law", archive_law);
+    lfocus = ac.viewFocus(similar,(byte) 2);
+    rfocus = ac.viewFocus2(similar,(byte)2);
+    intros = ac.viewIntros(similar,(byte)2);
+    rView = ac.viewRView(similar,(byte)5,"");
+    session.setAttribute("lfocus",lfocus);
+    session.setAttribute("rfocus",rfocus);
+    session.setAttribute("intros",intros);
+    session.setAttribute("rView",rView);
+  }
+  if (pos.equalsIgnoreCase("giao-duc") && size > 15) {
+    //Giao duc
+    similar.setArticle_category_id(items.get(15).getCategory_id());
+    String archive_edu = ac.viewArchive(similar, pages, (byte) 6);
+    session.setAttribute("archive_edu", archive_edu);
+    lfocus = ac.viewFocus(similar,(byte) 2);
+    rfocus = ac.viewFocus2(similar,(byte)2);
+    intros = ac.viewIntros(similar,(byte)2);
+    rView = ac.viewRView(similar,(byte)5,"");
+    session.setAttribute("lfocus",lfocus);
+    session.setAttribute("rfocus",rfocus);
+    session.setAttribute("intros",intros);
+    session.setAttribute("rView",rView);
+  }
+  if (pos.equalsIgnoreCase("khoa-hoc") && size > 16) {
+    //Khoa hoc
+    similar.setArticle_category_id(items.get(16).getCategory_id());
+    String archive_science = ac.viewArchive(similar, pages, (byte) 6);
+    session.setAttribute("archive_science", archive_science);
+    lfocus = ac.viewFocus(similar,(byte) 2);
+    rfocus = ac.viewFocus2(similar,(byte)2);
+    intros = ac.viewIntros(similar,(byte)2);
+    rView = ac.viewRView(similar,(byte)5,"");
+    session.setAttribute("lfocus",lfocus);
+    session.setAttribute("rfocus",rfocus);
+    session.setAttribute("intros",intros);
+    session.setAttribute("rView",rView);
+  }
+  if (pos.equalsIgnoreCase("du-lich") && size > 17) {
+    //Du lich
+    similar.setArticle_category_id(items.get(17).getCategory_id());
+    String archive_travel = ac.viewArchive(similar,  pages, (byte) 6);
+    session.setAttribute("archive_travel", archive_travel);
+    lfocus = ac.viewFocus(similar,(byte) 2);
+    rfocus = ac.viewFocus2(similar,(byte)2);
+    intros = ac.viewIntros(similar,(byte)2);
+    rView = ac.viewRView(similar,(byte)5,"");
+    session.setAttribute("lfocus",lfocus);
+    session.setAttribute("rfocus",rfocus);
+    session.setAttribute("intros",intros);
+    session.setAttribute("rView",rView);
+  }
+  if (pos.equalsIgnoreCase("the-gioi") && size > 18) {
+    //The gioi
+    similar.setArticle_category_id(items.get(18).getCategory_id());
+    String archive_world = ac.viewArchive(similar,  pages, (byte) 6);
+    session.setAttribute("archive_world", archive_world);
+    lfocus = ac.viewFocus(similar,(byte) 2);
+    rfocus = ac.viewFocus2(similar,(byte)2);
+    intros = ac.viewIntros(similar,(byte)2);
+    rView = ac.viewRView(similar,(byte)5,"");
+    session.setAttribute("lfocus",lfocus);
+    session.setAttribute("rfocus",rfocus);
+    session.setAttribute("intros",intros);
+    session.setAttribute("rView",rView);
+  }
+  //TRa ve ket noi
+  ac.releaseConnection();
+%>

@@ -1,0 +1,217 @@
+package jsoft.ads.user;
+
+import java.io.*;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+import jsoft.*;
+import jsoft.objects.*;
+
+public class UserLogin extends HttpServlet {
+
+    //Khai bao kieu noi dung xuat ve trinh khach (client)
+    private static final String CONTENT_TYPE = "text/html; charset=utf-8";
+
+    //Initialize global variables
+    public void init() throws ServletException {
+    }
+
+    //Process the HTTP Get request
+    //Cung cap mot cau truc HTML ve phia trinh khach
+    //Goi thong qua URL va su kien method="get" cua form
+
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws
+            ServletException, IOException {
+        //Tham so request - luu tru cac yeu cau xu li,...
+        //tu trinh khach gui len
+        //Tham so response - luu tru cac ket qua da dk xu li
+        //gui ve phia trinh khach
+
+        //Xac dinh kieu noi dung cho trinh khach
+        response.setContentType(CONTENT_TYPE);
+
+        //Tim tham so bao loi neu co
+        String error = request.getParameter("err"); //err la tham so duong dan
+        String message = "";
+        if (error != null) {
+            if (error.equalsIgnoreCase("param")) {
+                message = "L\u1ED7i tham s\u1ED1";
+            } else if (error.equalsIgnoreCase("value")) {
+                message = "L\u1ED7i giá tr\u1ECB";
+            } else if (error.equalsIgnoreCase("notok")) {
+                message = "Không thành công";
+            } else {
+                message = "Không h\u1EE3p l\u1EC7";
+            }
+        }
+
+        //Tao doi tuong xuat noi dung ve trinh khach
+        PrintWriter out = response.getWriter();
+
+        //Thuc hien xuat noi dung
+        out.print("<html class=\"no-js\" lang=\"\"> <!--<![endif]-->");
+        out.print("<head>");
+        out.print("<meta charset=\"utf-8\">");
+        out.print("<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">");
+        out.print("<title>VNnews - Trang thu th\u1EADp tin t\u1EE9c Vi\u1EC7t Nam</title>");
+        out.print(
+                "<meta name=\"description\" content=\"Ela Admin - HTML5 Admin Template\">");
+        out.print(
+                "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">");
+        out.print("");
+        out.print(
+                "<link rel=\"apple-touch-icon\" href=\"../../images/favorite-icon.png\">");
+        out.print(
+                "<link rel=\"shortcut icon\" href=\"../../images/favorite-icon.png\">");
+        out.print("");
+        out.print(
+                "<link rel=\"stylesheet\" href=\"../../assets/css/custom.css\">");
+        out.print(
+                "<link rel=\"stylesheet\" href=\"../../assets/css/normalize.css\">");
+        out.print(
+                "<link rel=\"stylesheet\" href=\"../../assets/css/bootstrap.min.css\">");
+        out.print(
+                "<link rel=\"stylesheet\" href=\"../../assets/css/font-awesome.min.css\">");
+        out.print(
+                "<link rel=\"stylesheet\" href=\"../../assets/css/themify-icons.css\">");
+        out.print(
+                "<link rel=\"stylesheet\" href=\"../../assets/css/pe-icon-7-filled.css\">");
+        out.print(
+                "<link rel=\"stylesheet\" href=\"../../assets/css/flag-icon.min.css\">");
+        out.print(
+                "<link rel=\"stylesheet\" href=\"../../assets/css/cs-skin-elastic.css\">");
+        out.print(
+                "<!-- <link rel=\"stylesheet\" href=\"assets/css/bootstrap-select.less\"> -->");
+        out.print(
+                "<link rel=\"stylesheet\" href=\"../../assets/css/style.css\">");
+        out.print("</head>");
+        out.print("<body class=\"bg-dark\">");
+
+        out.print(
+                "<div class=\"sufee-login d-flex align-content-center flex-wrap\">");
+        out.print("<div class=\"container\">");
+        out.print("<div class=\"login-content\">");
+        out.print("<div class=\"login-logo\">");
+        out.print("<a href=\"index.html\">");
+        out.print(
+                "<img class=\"align-content\" src=\"images/logo.png\" alt=\"\">");
+        out.print("</a>");
+        out.print("</div>");
+        out.print("<div class=\"login-form\">");
+        out.print("<form>");
+        out.print("<div class=\"form-group\">");
+
+        if(!message.equalsIgnoreCase("")){
+            out.print("<tr><td colspan=2>");
+            out.print("<h1 style=\"color: red; \" >");
+            out.print(message);
+            out.print("</h1>");
+            out.print("</td></tr>");
+        }
+
+        out.print("<label>Email</label>");
+        out.print(
+                "<input type=\"email\" class=\"form-control\" placeholder=\"Email\">");
+        out.print("</div>");
+        out.print("<div class=\"form-group\">");
+        out.print("<label>Password</label>");
+        out.print(
+                "<input type=\"password\" class=\"form-control\" placeholder=\"Password\">");
+        out.print("</div>");
+        out.print("<div class=\"checkbox\">");
+        out.print("<label>");
+        out.print("<input type=\"checkbox\"> Ghi nh\u1EDB \u0111\u0103ng nh\u1EADp");
+        out.print("</label>");
+        out.print("<label class=\"pull-right\">");
+        out.print("<a href=\"#\">Quên m\u1EADt kh\u1EA9u?</a>");
+        out.print("</label>");
+
+        out.print("</div>");
+        out.print("<button type=\"submit\" class=\"btn btn-success btn-flat m-b-30 m-t-30\">\u0110\u0103ng nh\u1EADp</button>");
+        out.print("</form>");
+        out.print("</div>");
+        out.print("</div>");
+        out.print("</div>");
+        out.print("</div>");
+
+        out.print(
+                "<script src=\"assets/js/vendor/jquery-2.1.4.min.js\"></script>");
+        out.print("<script src=\"assets/js/popper.min.js\"></script>");
+        out.print("<script src=\"assets/js/plugins.js\"></script>");
+        out.print("<script src=\"assets/js/main.js\"></script>");
+        out.print("</body>");
+        out.print("</html>");
+
+        //Dong luong xuat
+        out.close();
+    }
+
+    //Process the HTTP Post request
+    //Xu li cac yeu cau nghiep vu cac du lieu do doGet truyen cho
+    //Chi duoc hoi voi method ="post" cua form
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws
+            ServletException, IOException {
+        //Lay du lieu cho doGet truyen cho
+        String username = request.getParameter("txtUserName");
+        String userpass = request.getParameter("txtUserPass");
+
+        //Kiem tra su ton tai cua tham so
+        if (username != null && userpass != null) {
+
+            //Loai bo dau cach
+            username = username.trim();
+            userpass = userpass.trim();
+            //Kiem tra su ton tai cua gia tri
+            if (!username.equalsIgnoreCase("") &&
+                !userpass.equalsIgnoreCase("")) {
+
+                //Tham chieu ngu canh ung dung
+                ServletContext application = getServletConfig().getServletContext();
+
+                //Tim bo quan li ket noi trong ngu canh
+                ConnectionPool cp = (ConnectionPool) application.getAttribute("CPool");
+
+                //Tao doi tuong thuc thi chuc nang
+                UserControl uc = new UserControl(cp);
+
+                if (cp == null) {
+                    application.setAttribute("CPool", uc.getCP());
+                }
+
+                //Thuc hien dang nhap
+                UserObject user = uc.getUserObject(username, userpass);
+
+                //Tra lai ket noi cho cac doi tuong khac
+                uc.releaseCon();
+
+                //Kiem tra ket qua dang nhap
+                if (user != null) {
+
+                    //Tham chieu phien lam viec
+                    HttpSession session = request.getSession(true);
+
+                    //Dua thong tin dang nhap vao phien
+                    session.setAttribute("userLogined", user);
+
+                    //Tro ve giao dien chinh
+                    response.sendRedirect("/adv/view");
+
+                } else {
+                    response.sendRedirect("/adv/user/login?err=notok");
+                }
+
+            } else {
+                response.sendRedirect("/adv/user/login?err=value");
+            }
+
+        } else {
+            response.sendRedirect("/adv/user/login?err=param");
+        }
+
+    }
+
+    //Clean up resources
+    public void destroy() {
+    }
+}

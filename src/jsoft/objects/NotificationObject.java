@@ -1,0 +1,69 @@
+package jsoft.objects;
+
+public class NotificationObject {
+    private int noti_id;
+    private String noti_content;
+    private String noti_type;
+    private int noti_user_id;
+    private boolean noti_readed;
+    private String noti_created_at;
+    private String noti_readed_at;
+    public NotificationObject() {
+    }
+
+    public void setNoti_id(int noti_id) {
+        this.noti_id = noti_id;
+    }
+
+    public void setNoti_content(String noti_content) {
+        this.noti_content = noti_content;
+    }
+
+    public void setNoti_type(String noti_type) {
+        this.noti_type = noti_type;
+    }
+
+    public void setNoti_user_id(int noti_user_id) {
+        this.noti_user_id = noti_user_id;
+    }
+
+    public void setNoti_readed(boolean noti_readed) {
+        this.noti_readed = noti_readed;
+    }
+
+    public void setNoti_created_at(String noti_created_at) {
+        this.noti_created_at = noti_created_at;
+    }
+
+    public void setNoti_readed_at(String noti_readed_at) {
+        this.noti_readed_at = noti_readed_at;
+    }
+
+    public int getNoti_id() {
+        return noti_id;
+    }
+
+    public String getNoti_content() {
+        return noti_content;
+    }
+
+    public String getNoti_type() {
+        return noti_type;
+    }
+
+    public int getNoti_user_id() {
+        return noti_user_id;
+    }
+
+    public boolean isNoti_readed() {
+        return noti_readed;
+    }
+
+    public String getNoti_created_at() {
+        return noti_created_at;
+    }
+
+    public String getNoti_readed_at() {
+        return noti_readed_at;
+    }
+}

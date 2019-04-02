@@ -1,0 +1,17 @@
+[PropertyInfo]
+source_id,int,false,false,source_id,source_id,true,<default>
+source_name,String,false,false,source_name,source_name,true,<default>
+source_link,String,false,false,source_link,source_link,true,<default>
+source_enable,boolean,false,false,source_enable,source_enable,true,<default>
+source_html_selector,String,false,false,source_html_selector,source_html_selector,true,<default>
+source_created_at,String,false,false,source_created_at,source_created_at,true,<default>
+source_creator_id,int,false,false,source_creator_id,source_creator_id,true,<default>
+source_creator_name,String,false,false,source_creator_name,source_creator_name,true,<default>
+source_last_updated_at,String,false,false,source_last_updated_at,source_last_updated_at,true,<default>
+source_last_updator_id,int,false,false,source_last_updator_id,source_last_updator_id,true,<default>
+source_last_updator_name,String,false,false,source_last_updator_name,source_last_updator_name,true,<default>
+[IconNames]
+
+
+
+

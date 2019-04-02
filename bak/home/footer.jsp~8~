@@ -1,0 +1,103 @@
+<%@page language="java" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
+<footer id="footer">
+  <div class="footer_top">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-4">
+          <div class="single_footer_top wow fadeInRight">
+            <h2>Giới thiệu</h2>
+            <p><strong>Thành lập ngày 10/09/2018.</strong><br>
+            <strong>Sinh viên trường đại học Công nghiệp Hà Nội</strong>.<br>
+            <!-- <strong>Giấy phép:</strong> XXX.<br> -->
+            <strong>Điện thoại:</strong> 033-4492-484<br>
+            <strong>Người thực hiện: Nhóm 01-KTPM4-K10</strong><br>
+            <span style="margin-left: 20px;">- Nguyễn Như Thuỳ</span><br>
+            <span style="margin-left: 20px;">- Nguyễn Trung Hiếu</span><br>
+            <span style="margin-left: 20px;">- Trần Quang Minh</span><br>
+            </p>
+            <p>
+            <!-- <strong>Tòa soạn:</strong> XXX. -->
+            <!-- <strong>Đường dây nóng:</strong> 0123 123 0123<br> -->
+            <!-- <strong>Fax:</strong> 024 3795 XXXX -->
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="single_footer_top wow fadeInRight">
+              <a href="index.html"><img src="images/favorite-icon.png" height="150px"></a>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer_bottom">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+          <div class="footer_bottom_left">
+            <p>Copyright &copy; 2018 <a href="index.html">Nhóm 01 KTPM4 K10 </a></p>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+          <div class="footer_bottom_right">
+            <p>Developed BY Wpfreeware</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Modal Sign in-->
+<div class="modal fade" id="modalSignIn" role="dialog">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <form action="<%=request.getContextPath()%>" class="search_form" method="POST">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="usr">Tên đăng nhập:</label>
+            <input type="email" class="form-control" id="usr" placeholder="Email">
+          </div>
+          <div class="form-group">
+            <label for="pwd">Mật khẩu:</label>
+            <input type="password" class="form-control" id="pwd" placeholder="Mật khẩu">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a href="#">Quên mật khẩu?</a>
+          <button type="submit" class="btn btn-default modal-submit" data-dismiss="modal">Đăng nhập</button>
+          <br>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Sign up-->
+<div class="modal fade" id="modalSignUp" role="dialog">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <form action="#" class="search_form">
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="usr">Tên đăng nhập:</label>
+              <input type="email" class="form-control" id="usr" placeholder="Email">
+            </div>
+            <div class="form-group">
+              <label for="pwd">Mật khẩu:</label>
+              <input type="password" class="form-control" id="pwd" placeholder="Mật khẩu">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-default modal-submit" data-dismiss="modal">Đăng ký</button>
+            <br>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+<script src="/home/assets/js/jquery.min.js"></script>
+<script src="/home/assets/js/bootstrap.min.js"></script>
+<script src="/home/assets/js/wow.min.js"></script>
+<script src="/home/assets/js/slick.min.js"></script>
+<script src="/home/assets/js/custom.js"></script>

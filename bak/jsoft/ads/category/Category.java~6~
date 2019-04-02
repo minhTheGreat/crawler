@@ -1,0 +1,29 @@
+package jsoft.ads.category;
+import java.sql.*;
+import jsoft.objects.*;
+import jsoft.*;
+/**
+ * <p>Title: JP1707 Project</p>
+ *
+ * <p>Description: </p>
+ *
+ * <p>Copyright: Copyright (c) 2018</p>
+ *
+ * <p>Company: </p>
+ *
+ * @author TrungHieu
+ * @version 1.0
+ */
+public interface Category extends ShareControl{
+    //Cac chuc nang cap nhat nguoi su dung
+   public boolean addCategory(CategoryObject item);
+   public boolean editCategory(CategoryObject item);
+   public boolean delCategory(CategoryObject item);
+   public String enable(int id);
+
+   //Cac chuc nang lay du lieu
+   public ResultSet getCategory(int id);
+   public ResultSet getCategory(String name);
+   public ResultSet getCategorys(CategoryObject similar, int at, int total);
+   public ResultSet getCategorys2(CategoryObject similar, int at, int total);
+}

@@ -1,0 +1,155 @@
+package jsoft.ads.main;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.io.*;
+import java.util.*;
+import jsoft.objects.*;
+
+public class header extends HttpServlet {
+    private static final String CONTENT_TYPE = "text/html;charset=utf-8";
+
+    //Initialize global variables
+    public void init() throws ServletException {
+    }
+
+    //Process the HTTP Get request
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws
+            ServletException, IOException {
+        response.setContentType(CONTENT_TYPE);
+        PrintWriter out = response.getWriter();
+
+        out.print("<html class=\"no-js\" lang=\"\"> <!--<![endif]-->");
+        out.print("<head>");
+        out.print("<meta charset=\"utf-8\">");
+        out.print("<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">");
+        out.print("<title>VNnews - Trang thu th\u1EADp tin t\u1EE9c Vi\u1EC7t Nam</title>");
+        out.print(
+                "<meta name=\"description\" content=\"Ela Admin - HTML5 Admin Template\">");
+        out.print(
+                "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">");
+        out.print("");
+        out.print("<link rel=\"apple-touch-icon\" href=\"/adv/images/logo.png\">");
+        out.print("<link rel=\"shortcut icon\" href=\"/adv/images/logo.png\">");
+        out.print("");
+        out.print("<link rel=\"stylesheet\" href=\"/adv/assets/css/normalize.css\">");
+        out.print(
+                "<link rel=\"stylesheet\" href=\"/adv/assets/css/bootstrap.min.css\">");
+        out.print(
+                "<link rel=\"stylesheet\" href=\"/adv/assets/css/font-awesome.min.css\">");
+        out.print(
+                "<link rel=\"stylesheet\" href=\"/adv/assets/css/themify-icons.css\">");
+        out.print(
+                "<link rel=\"stylesheet\" href=\"/adv/assets/css/pe-icon-7-filled.css\">");
+        out.print(
+                "<link href=\"/adv/assets/weather/css/weather-icons.css\" rel=\"stylesheet\" />");
+        out.print(
+                "<link href=\"/adv/assets/calendar/fullcalendar.css\" rel=\"stylesheet\" />");
+        out.print("");
+        out.print("<link rel=\"stylesheet\" href=\"/adv/assets/css/style.css\">");
+        out.print(
+                "<link href=\"/adv/assets/css/charts/chartist.min.css\" rel=\"stylesheet\"> ");
+        out.print(
+                "<link href=\"/adv/assets/css/lib/vector-map/jqvmap.min.css\" rel=\"stylesheet\"> ");
+        //////////////////////Thêm css,js tu cac user,category,...
+        out.print(
+              "<link rel=\"apple-touch-icon\" href=\"/adv/images/favorite-icon.png\">");
+        out.print(
+              "<link rel=\"shortcut icon\" href=\"/adv/images/favorite-icon.png\">");
+        out.print("");
+        out.print(
+              "<link rel=\"stylesheet\" href=\"/adv/assets/css/custom.css\">");
+        out.print(
+              "<link rel=\"stylesheet\" href=\"/adv/assets/css/flag-icon.min.css\">");
+        out.print(
+              "<link rel=\"stylesheet\" href=\"/adv/assets/css/cs-skin-elastic.css\">");
+        out.print("<link rel=\"stylesheet\" href=\"/adv/assets/css/lib/datatable/dataTables.bootstrap.min.css\">");
+
+
+        //////////////////////
+        out.print("<style>");
+        out.print("#weatherWidget .currentDesc {");
+        out.print("color: #ffffff!important;");
+        out.print("}");
+        out.print(".traffic-chart { ");
+        out.print("min-height: 335px; ");
+        out.print("}");
+        out.print("#flotPie1  {");
+        out.print("height: 150px;");
+        out.print("} ");
+        out.print("#flotPie1 td {");
+        out.print("padding:3px;");
+        out.print("}");
+        out.print("#flotPie1 table {");
+        out.print("top: 20px!important;");
+        out.print("right: -10px!important;");
+        out.print("}");
+        out.print(".chart-container {");
+        out.print("display: table;");
+        out.print("min-width: 270px ;");
+        out.print("text-align: left;");
+        out.print("padding-top: 10px;");
+        out.print("padding-bottom: 10px;");
+        out.print("}");
+        out.print("#flotLine5  {");
+        out.print("height: 105px;");
+        out.print("} ");
+
+        out.print("#flotBarChart {");
+        out.print("height: 150px;");
+        out.print("}");
+        out.print("#cellPaiChart{");
+        out.print("height: 160px;");
+        out.print("}");
+
+        out.print("</style>");
+
+        out.print("</head>");
+        out.print("<body>");
+
+        out.print("<!-- Left Panel --> ");
+        out.print("<aside id=\"left-panel\" class=\"left-panel\">");
+        out.print("<nav class=\"navbar navbar-expand-sm navbar-default\"> ");
+        out.print("<div id=\"main-menu\" class=\"main-menu collapse navbar-collapse\">");
+        out.print("<ul class=\"nav navbar-nav\">");
+        out.print("<li class=\"active\">");
+
+        out.print("<a href=\"/adv/view\"><i class=\"menu-icon fa fa-laptop\"></i>Th\u1ED1ng kê </a>");
+        out.print("</li>");
+        out.print("<li class=\"\">");
+        out.print("<a href=\"/adv/source/view\"><i class=\"menu-icon fa fa-cogs\"></i>Ngu\u1ED3n tin </a>");
+        out.print("</li>");
+        out.print("<li class=\"\">");
+        out.print("<a href=\"/adv/category/view\"><i class=\"menu-icon fa fa-book\"></i>Chuyên m\u1EE5c </a>");
+        out.print("</li>");
+        out.print("<li class=\"\">");
+        out.print("<a href=\"/adv/framework_assessment/view\"><i class=\"menu-icon fa fa-id-card-o\"></i>Khung tiêu chí \u0111ánh giá </a>");
+        out.print("</li>");
+        out.print("<li class=\"\">");
+        out.print("<a href=\"/adv/assessment_rule/view\"><i class=\"menu-icon fa fa-map-o\"></i>Tiêu chí \u0111ánh giá </a>");
+        out.print("</li>");
+        out.print("<li class=\"\">");
+        out.print("<a href=\"/adv/article/view\"><i class=\"menu-icon fa fa-file-word-o\"></i>Bài vi\u1EBFt </a>");
+        out.print("</li>");
+        out.print("<li class=\"\">");
+        //out.print("<a href=\"/adv/views/users/index.html\"><i class=\"menu-icon fa fa-users\"></i>User </a>");
+        out.print("<a href=\"/adv/user/view\"><i class=\"menu-icon fa fa-users\"></i>User </a>");
+        out.print("</li>");
+        out.print("</ul>");
+        out.print("</div><!-- /.navbar-collapse -->");
+        out.print("</nav>");
+        out.print("</aside><!-- /#left-panel --> ");
+        out.print("<!-- Left Panel -->");
+
+        //Tim menu va ghep
+        RequestDispatcher m = request.getRequestDispatcher("/menu");
+        if (m != null) {
+            m.include(request, response);
+        }
+
+    }
+
+    //Clean up resources
+    public void destroy() {
+    }
+}

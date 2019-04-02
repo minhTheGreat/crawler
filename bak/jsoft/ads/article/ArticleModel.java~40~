@@ -1,0 +1,268 @@
+package jsoft.ads.article;
+
+import jsoft.ConnectionPool;
+import jsoft.objects.*;
+import java.util.*;
+import java.sql.*;
+
+
+/**
+ * <p>Title: JP1707 Project</p>
+ *
+ * <p>Description: </p>
+ *
+ * <p>Copyright: Copyright (c) 2018</p>
+ *
+ * <p>Company: </p>
+ *
+ * @author TrungHieu
+ * @version 1.0
+ */
+public class ArticleModel {
+
+    private Article c;
+
+    public ArticleModel(ConnectionPool cp) {
+        this.c = new ArticleImpl(cp, "Article");
+    }
+
+    protected void finallize() throws Throwable {
+        this.c = null;
+        super.finalize();
+    }
+
+    public ConnectionPool getCP() {
+        return this.c.getCP();
+    }
+
+    public void releaseCon() {
+        this.c.releaseCon();
+    }
+
+
+    //----------------------------------------------------
+
+    public boolean addArticle(ArticleObject item) {
+        return this.c.addArticle(item);
+    }
+
+    public boolean editArticle(ArticleObject item) {
+        return this.c.editArticle(item);
+    }
+
+    public boolean updateAll() {
+        return this.c.updateAll();
+    }
+
+
+    public boolean delArticle(ArticleObject item) {
+        return this.c.delArticle(item);
+    }
+
+    public String enable(int id) {
+        String result = "fail";
+
+        ArticleObject item = null;
+
+        //Lay du lieu vao database,
+        ResultSet rs = this.c.getArticle(id);
+        if (rs != null) {
+            try {
+                if (rs.next()) {
+                    item = new ArticleObject();
+                    item.setArticle_id(rs.getInt("article_id"));
+                    item.setArticle_author(rs.getString("article_author"));
+                    item.setArticle_title(rs.getString("article_title"));
+                    item.setArticle_description(rs.getString(
+                            "article_description"));
+                    item.setArticle_image(rs.getString("article_image"));
+                    item.setArticle_link(rs.getString("article_link"));
+                    item.setArticle_category_id(rs.getInt("article_category_id"));
+                    item.setArticle_viewer(rs.getInt("article_viewer"));
+                    item.setArticle_enable(rs.getBoolean("article_enable"));
+                    item.setArticle_evaluation_point(rs.getInt(
+                            "article_evaluation_point"));
+                    item.setArticle_delete(rs.getBoolean("article_delete"));
+                    item.setArticle_created_at(rs.getString(
+                            "article_created_at"));
+                    item.setArticle_last_updated_at(rs.getString(
+                            "article_last_updated_at"));
+                    item.setArticle_last_updator_id(rs.getInt(
+                            "article_last_updator_id"));
+                    item.setArticle_last_updator_name(rs.getString(
+                            "article_last_updator_name"));
+
+                    item.setCategory_name(rs.getString("category_name"));
+                    item.setSource_name(rs.getString("source_name"));
+                    item.setSource_enable(rs.getBoolean("source_enable"));
+                    item.setCategory_enable(rs.getBoolean("category_enable"));
+                    item.setSource_id(rs.getInt("source_id"));
+                }
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        if (item.isArticle_enable() && item.isCategory_enable() && item.isSource_enable()) {
+            item.setArticle_enable(false);
+            this.c.enable(item);
+            result = "unenable";
+        } else {
+            item.setCategory_enable(true);
+            item.setSource_enable(true);
+            item.setArticle_enable(true);
+            this.c.enable(item);
+            result = "enable";
+        }
+
+        return result;
+    }
+
+    //----------------------------------------------------
+
+    public ArticleObject getArticleObject(int id) {
+        ArticleObject item = null;
+
+        //Lay du lieu vao database,
+        ResultSet rs = this.c.getArticle(id);
+        if (rs != null) {
+            try {
+                if (rs.next()) {
+                    item = new ArticleObject();
+                    item.setArticle_id(rs.getInt("article_id"));
+                    item.setArticle_author(rs.getString("article_author"));
+                    item.setArticle_title(rs.getString("article_title"));
+                    item.setArticle_description(rs.getString(
+                            "article_description"));
+                    item.setArticle_image(rs.getString("article_image"));
+                    item.setArticle_link(rs.getString("article_link"));
+                    item.setArticle_category_id(rs.getInt("article_category_id"));
+                    item.setArticle_viewer(rs.getInt("article_viewer"));
+                    item.setArticle_enable(rs.getBoolean("article_enable"));
+                    item.setArticle_evaluation_point(rs.getInt(
+                            "article_evaluation_point"));
+                    item.setArticle_delete(rs.getBoolean("article_delete"));
+                    item.setArticle_created_at(rs.getString(
+                            "article_created_at"));
+                    item.setArticle_last_updated_at(rs.getString(
+                            "article_last_updated_at"));
+                    item.setArticle_last_updator_id(rs.getInt(
+                            "article_last_updator_id"));
+                    item.setArticle_last_updator_name(rs.getString(
+                            "article_last_updator_name"));
+
+                    item.setCategory_name(rs.getString("category_name"));
+                    item.setSource_name(rs.getString("source_name"));
+                }
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        return item;
+    }
+
+    public ArticleObject getArticleObject(String title) {
+        ArticleObject item = null;
+
+        //Lay du lieu vao database,
+        ResultSet rs = this.c.getArticle(title);
+        if (rs != null) {
+            try {
+                if (rs.next()) {
+                    item = new ArticleObject();
+                    item.setArticle_id(rs.getInt("article_id"));
+                    item.setArticle_author(rs.getString("article_author"));
+                    item.setArticle_title(rs.getString("article_title"));
+                    item.setArticle_description(rs.getString(
+                            "article_description"));
+                    item.setArticle_image(rs.getString("article_image"));
+                    item.setArticle_link(rs.getString("article_link"));
+                    item.setArticle_category_id(rs.getInt("article_category_id"));
+                    item.setArticle_viewer(rs.getInt("article_viewer"));
+                    item.setArticle_enable(rs.getBoolean("article_enable"));
+                    item.setArticle_evaluation_point(rs.getInt(
+                            "article_evaluation_point"));
+                    item.setArticle_delete(rs.getBoolean("article_delete"));
+                    item.setArticle_created_at(rs.getString(
+                            "article_created_at"));
+                    item.setArticle_last_updated_at(rs.getString(
+                            "article_last_updated_at"));
+                    item.setArticle_last_updator_id(rs.getInt(
+                            "article_last_updator_id"));
+                    item.setArticle_last_updator_name(rs.getString(
+                            "article_last_updator_name"));
+
+                    item.setCategory_name(rs.getString("category_name"));
+                    item.setSource_name(rs.getString("source_name"));
+                }
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        return item;
+    }
+
+
+    public ArrayList getArticleObjects(ArticleObject similar, int page,
+                                       int total) {
+
+        ArrayList items = new ArrayList();
+        ArticleObject item = null;
+
+        //Lay du lieu vao database,
+        int at = (page - 1) * total;
+
+        ResultSet rs = this.c.getArticles(similar, at, total);
+        if (rs != null) {
+            try {
+                while (rs.next()) {
+                    item = new ArticleObject();
+                    item.setArticle_id(rs.getInt("article_id"));
+                    item.setArticle_author(rs.getString("article_author"));
+                    item.setArticle_title(rs.getString("article_title"));
+                    item.setArticle_description(rs.getString(
+                            "article_description"));
+                    item.setArticle_image(rs.getString("article_image"));
+                    item.setArticle_link(rs.getString("article_link"));
+                    item.setArticle_category_id(rs.getInt("article_category_id"));
+                    item.setArticle_viewer(rs.getInt("article_viewer"));
+                    item.setArticle_enable(rs.getBoolean("article_enable"));
+                    item.setArticle_evaluation_point(rs.getInt(
+                            "article_evaluation_point"));
+                    item.setArticle_delete(rs.getBoolean("article_delete"));
+                    item.setArticle_created_at(rs.getString(
+                            "article_created_at"));
+                    item.setArticle_last_updated_at(rs.getString(
+                            "article_last_updated_at"));
+                    item.setArticle_last_updator_id(rs.getInt(
+                            "article_last_updator_id"));
+                    item.setArticle_last_updator_name(rs.getString(
+                            "article_last_updator_name"));
+
+                    item.setCategory_name(rs.getString("category_name"));
+                    item.setSource_name(rs.getString("source_name"));
+                    item.setSource_enable(rs.getBoolean("source_enable"));
+                    item.setCategory_enable(rs.getBoolean("category_enable"));
+                    item.setSource_id(rs.getInt("source_id"));
+
+
+                    items.add(item);
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        return items;
+    }
+
+    public int getSize(){
+        return this.c.getSize();
+    }
+
+}

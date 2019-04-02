@@ -1,0 +1,13 @@
+[PropertyInfo]
+noti_id,int,false,false,noti_id,noti_id,true,<default>
+noti_content,String,false,false,noti_content,noti_content,true,<default>
+noti_type,String,false,false,noti_type,noti_type,true,<default>
+noti_user_id,int,false,false,noti_user_id,noti_user_id,true,<default>
+noti_readed,boolean,false,false,noti_readed,noti_readed,true,<default>
+noti_created_at,String,false,false,noti_created_at,noti_created_at,true,<default>
+noti_readed_at,String,false,false,noti_readed_at,noti_readed_at,true,<default>
+[IconNames]
+
+
+
+

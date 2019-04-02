@@ -1,0 +1,101 @@
+package jsoft.ads.article;
+
+import jsoft.*;
+import jsoft.objects.*;
+
+import java.util.*;
+
+/**
+ * <p>Title: JP1707 Project</p>
+ *
+ * <p>Description: </p>
+ *
+ * <p>Copyright: Copyright (c) 2018</p>
+ *
+ * <p>Company: </p>
+ *
+ * @author TrungHieu
+ * @version 1.0
+ */
+public class ArticleControl {
+
+    private ArticleModel am;
+
+
+    public ArticleControl(ConnectionPool cp) {
+        this.am = new ArticleModel(cp);
+    }
+
+    protected void finalize() throws Throwable {
+        this.am = null;
+        super.finalize();
+    }
+
+    public ConnectionPool getCP() {
+        return this.am.getCP();
+    }
+
+    public void releaseCon() {
+        this.am.releaseCon();
+    }
+
+
+    //-----------------------------------------
+
+    public boolean addArticle(ArticleObject item) {
+        return this.am.addArticle(item);
+    }
+
+    public boolean editArticle(ArticleObject item) {
+        return this.am.editArticle(item);
+    }
+
+    public boolean delArticle(ArticleObject item) {
+        return this.am.delArticle(item);
+    }
+
+    public String enableArticle(int id){
+        return this.am.enable(id);
+    }
+
+    //-----------------------------------------
+
+    public ArticleObject getArticleObject(int id) {
+        return this.am.getArticleObject(id);
+    }
+
+    public ArticleObject getArticleObject(String title) {
+        return this.am.getArticleObject(title);
+    }
+
+    public ArticleObject getArticleObjectByLink(String link) {
+
+    }
+
+
+    public ArrayList getArticleObjects(ArticleObject similar, short page, int total) {
+        return this.am.getArticleObjects(similar, page, total);
+    }
+
+
+    public void modifiAll(){
+        this.am.updateAll();
+        return;
+    }
+
+    public int getSize(){
+        return this.am.getSize();
+    }
+
+    //-----------------------------------------
+    public String viewArticles(ArticleObject similar, short page,int total) {
+
+        //Lay danh sach doi tuong
+        ArrayList items = this.am.getArticleObjects(similar, page, total);
+
+        //TRa ve cau truc HTML
+        return ArticleLibrary.viewArticles(items);
+
+    }
+
+}

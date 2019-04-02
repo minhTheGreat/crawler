@@ -1,0 +1,42 @@
+package jsoft.objects;
+
+public class AssessmentObject {
+    private int asssessment_id;
+    private String assessment_name;
+    private boolean assessment_enable;
+    private byte assessment_type;
+    public AssessmentObject() {
+    }
+
+    public void setAsssessment_id(int asssessment_id) {
+        this.asssessment_id = asssessment_id;
+    }
+
+    public void setAssessment_name(String assessment_name) {
+        this.assessment_name = assessment_name;
+    }
+
+    public void setAssessment_enable(boolean assessment_enable) {
+        this.assessment_enable = assessment_enable;
+    }
+
+    public void setAssessment_type(byte assessment_type) {
+        this.assessment_type = assessment_type;
+    }
+
+    public int getAsssessment_id() {
+        return asssessment_id;
+    }
+
+    public String getAssessment_name() {
+        return assessment_name;
+    }
+
+    public boolean isAssessment_enable() {
+        return assessment_enable;
+    }
+
+    public byte getAssessment_type() {
+        return assessment_type;
+    }
+}

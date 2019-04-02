@@ -1,0 +1,164 @@
+package jsoft.ads.source_category;
+
+import java.sql.*;
+
+import jsoft.*;
+import jsoft.objects.*;
+import jsoft.ads.basic.*;
+
+public class Source_categoryImpl extends BasicImpl implements Source_category {
+    public Source_categoryImpl(ConnectionPool cp, String objectName) {
+        super(cp, objectName);
+    }
+
+    /**
+     * addSource_category
+     *
+     * @param item Source_categoryObject
+     * @return boolean
+     * @todo Implement this jsoft.ads.source_category.Source_category method
+     */
+    public boolean addSource_category(Source_categoryObject item) {
+
+        String sql = "INSERT INTO tblsource_category( ";
+
+        sql += "sc_source_id,  ";
+        sql += "sc_category_id, sc_link,  ";
+        sql += "sc_creator, sc_enable, ";
+        sql += "sc_priority)";
+
+        sql += "VALUES(?,?,?,?,?,?,?,?,?)";
+
+        try {
+            PreparedStatement pre = this.con.prepareStatement(sql);
+            //Truyen gia tri
+            pre.setInt(1, item.getSc_source_id());
+            pre.setInt(2, item.getSc_category_id());
+            pre.setString(3, item.getSc_link());
+            pre.setInt(4, item.getSc_creator());
+            pre.setBoolean(5, item.isSc_enable());
+            pre.setInt(6, item.getSc_priority());
+
+            //Tra ve ket qua
+            return this.add(pre);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return false;
+    }
+
+
+    /**
+     * delSource_category
+     *
+     * @param item Source_categoryObject
+     * @return boolean
+     * @todo Implement this jsoft.ads.source_category.Source_category method
+     */
+    public boolean delSource_category(Source_categoryObject item) {
+
+        String sql = "DELETE FROM tblsource_category WHERE sc_id=?";
+        try {
+            PreparedStatement pre = this.con.prepareStatement(sql);
+            pre.setInt(1, item.getSc_id());
+
+            return this.del(pre);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return false;
+    }
+
+    /**
+     * editSource_category
+     *
+     * @param item Source_categoryObject
+     * @return boolean
+     * @todo Implement this jsoft.ads.source_category.Source_category method
+     */
+    public boolean editSource_category(Source_categoryObject item) {
+
+        String sql = "UPDATE tblsource_category SET ";
+
+        sql += "sc_source_id=?,  ";
+        sql += "sc_category_id=?, sc_link=?,  ";
+        sql += "sc_enable=?, ";
+        sql += "sc_priority=? ";
+
+        sql += "WHERE source_id=?";
+
+        try {
+            PreparedStatement pre = this.con.prepareStatement(sql);
+            //Truyen gia tri
+            pre.setInt(1, item.getSc_source_id());
+            pre.setInt(2, item.getSc_category_id());
+            pre.setString(3, item.getSc_link());
+
+            pre.setBoolean(4, item.isSc_enable());
+            pre.setInt(5, item.getSc_priority());
+
+            pre.setInt(6, item.getSc_id());
+
+            //Tra ve ket qua
+            return this.edit(pre);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return false;
+    }
+
+    /**
+     * getCP
+     *
+     * @return ConnectionPool
+     * @todo Implement this jsoft.ShareControl method
+     */
+    public ConnectionPool getCP() {
+        return null;
+    }
+
+    /**
+     * getSource_category
+     *
+     * @param id int
+     * @return ResultSet
+     * @todo Implement this jsoft.ads.source_category.Source_category method
+     */
+    public ResultSet getSource_category(int id) {
+        String sql = "SELECT * FROM tblsource WHERE source_id=?";
+        sql += "LEFT JOIN tblcategory ON ";
+        return this.get(sql, id);
+
+    }
+
+    /**
+     * getSource_categorys
+     *
+     * @param similar Source_categoryObject
+     * @param at int
+     * @param total byte
+     * @return ResultSet
+     * @todo Implement this jsoft.ads.source_category.Source_category method
+     */
+    public ResultSet getSource_categorys(Source_categoryObject similar, int at,
+                                         byte total) {
+        return null;
+    }
+
+    /**
+     * releaseCon
+     *
+     * @todo Implement this jsoft.ShareControl method
+     */
+    public void releaseCon() {
+    }
+
+    public static void main(String[] args) {
+    }
+}

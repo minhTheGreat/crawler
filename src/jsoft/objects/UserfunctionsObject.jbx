@@ -1,0 +1,9 @@
+[PropertyInfo]
+uf_id,int,false,false,uf_id,uf_id,true,<default>
+uf_user_id,int,false,false,uf_user_id,uf_user_id,true,<default>
+uf_uf_function_id,int,false,false,uf_uf_function_id,uf_uf_function_id,true,<default>
+[IconNames]
+
+
+
+

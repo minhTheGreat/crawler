@@ -1,0 +1,125 @@
+package jsoft.ads.category;
+
+import jsoft.ConnectionPool;
+import jsoft.objects.*;
+import java.util.*;
+import java.sql.*;
+
+
+/**
+ * <p>Title: JP1707 Project</p>
+ *
+ * <p>Description: </p>
+ *
+ * <p>Copyright: Copyright (c) 2018</p>
+ *
+ * <p>Company: </p>
+ *
+ * @author TrungHieu
+ * @version 1.0
+ */
+public class CategoryModel {
+
+    private Category c;
+
+    public CategoryModel(ConnectionPool cp) {
+        this.c = new CategoryImpl(cp);
+    }
+
+    protected void finallize() throws Throwable {
+        this.c = null;
+        super.finalize();
+    }
+
+    public ConnectionPool getCP() {
+        return this.c.getCP();
+    }
+
+    public void releaseCon() {
+        this.c.releaseCon();
+    }
+
+
+    //----------------------------------------------------
+
+    public boolean addCategory(CategoryObject item) {
+        return this.c.addCategory(item);
+    }
+
+    public boolean editCategory(CategoryObject item) {
+        return this.c.editCategory(item);
+    }
+
+    public boolean delCategory(CategoryObject item) {
+        return this.c.delCategory(item);
+    }
+
+    //----------------------------------------------------
+
+    public CategoryObject getCategoryObject(int id) {
+        CategoryObject item = null;
+
+        //Lay du lieu vao database,
+        ResultSet rs = this.c.getCategory(id);
+        if (rs != null) {
+            try {
+                if (rs.next()) {
+                    item = new CategoryObject();
+                    item.setCategory_id(rs.getInt("category_id"));
+                    item.setCategory_name(rs.getString("category_name"));
+                    item.setCategory_creator(rs.getInt("category_creator"));
+                    item.setCategory_last_updated_at(rs.getString(
+                            "category_last_updated_at"));
+                    item.setCategory_assessment_creator(rs.getInt(
+                            "category_assessment_creator"));
+                    item.setCategory_assessment_id(rs.getInt(
+                            "category_assessment_id"));
+                    item.setCategory_enable(rs.getBoolean("category_enable"));
+                    item.setCategory_last_updator(rs.getInt(
+                            "category_last_updator"));
+                }
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        return item;
+    }
+
+    public ArrayList getCategoryObjects(CategoryObject similar, int page,
+                                        byte total) {
+
+        ArrayList items = new ArrayList();
+        CategoryObject item = null;
+
+        //Lay du lieu vao database,
+        int at = (page - 1) * total;
+
+        ResultSet rs = this.c.getCategorys(similar, at, total);
+        if (rs != null) {
+            try {
+                while (rs.next()) {
+                    item = new CategoryObject();
+                    item.setCategory_id(rs.getInt("category_id"));
+                    item.setCategory_name(rs.getString("category_name"));
+                    item.setCategory_creator(rs.getInt("category_creator"));
+                    item.setCategory_last_updated_at(rs.getString("category_last_updated_at"));
+                    item.setCategory_assessment_creator(rs.getInt("category_assessment_creator"));
+                    item.setCategory_assessment_id(rs.getInt( "category_assessment_id"));
+                    item.setCategory_enable(rs.getBoolean("category_enable"));
+                    item.setCategory_last_updator(rs.getInt( "category_last_updator"));
+
+                    items.add(item);
+
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        return items;
+    }
+
+
+}

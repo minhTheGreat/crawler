@@ -1,0 +1,37 @@
+package jsoft.objects;
+
+public class UserfunctionsObject {
+    private int uf_id;
+    private int uf_user_id;
+    private int uf_uf_function_id;
+    public UserfunctionsObject() {
+    }
+
+    public static void main(String[] args) {
+        UserfunctionsObject userfunctionsobject = new UserfunctionsObject();
+    }
+
+    public void setUf_id(int uf_id) {
+        this.uf_id = uf_id;
+    }
+
+    public void setUf_user_id(int uf_user_id) {
+        this.uf_user_id = uf_user_id;
+    }
+
+    public void setUf_uf_function_id(int uf_uf_function_id) {
+        this.uf_uf_function_id = uf_uf_function_id;
+    }
+
+    public int getUf_id() {
+        return uf_id;
+    }
+
+    public int getUf_user_id() {
+        return uf_user_id;
+    }
+
+    public int getUf_uf_function_id() {
+        return uf_uf_function_id;
+    }
+}

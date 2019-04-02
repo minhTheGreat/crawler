@@ -1,0 +1,214 @@
+package jsoft.ads.category;
+
+import jsoft.objects.CategoryObject;
+import java.sql.*;
+import jsoft.objects.*;
+import jsoft.ads.basic.*;
+import jsoft.*;
+
+
+public class CategoryImpl extends BasicImpl implements Category {
+    public CategoryImpl(ConnectionPool cp) {
+        super(cp, "Category");
+    }
+
+    /**
+     * addCategory
+     *
+     * @param item CategoryObject
+     * @return boolean
+     * @todo Implement this jsoft.ads.category.Category method
+     */
+    public boolean addCategory(CategoryObject item) {
+
+        //Kiem tra su ton tai
+        if(this.isExisting(item)){
+            return false;
+        }
+
+        String sql = "INSERT INTO tblcategory( ";
+
+        sql += "category_name, ";
+        sql += "category_creator, category_last_updated_at, ";
+        sql += "category_last_updator, category_enable, ";
+        sql += "category_assessment_id, category_assessment_creator) ";
+
+        sql += "VALUES(?,?,?,?,?,?,?)";
+
+        //Bien dich
+        try {
+            PreparedStatement pre = this.con.prepareStatement(sql);
+
+            //Truyen gia tri
+            pre.setString(1, item.getCategory_name());
+            pre.setInt(2, item.getCategory_creator());
+            pre.setString(3, item.getCategory_last_updated_at());
+            pre.setInt(4, item.getCategory_last_updator());
+            pre.setBoolean(5, item.isCategory_enable());
+            pre.setInt(6, item.getCategory_assessment_id());
+            pre.setInt(7, item.getCategory_assessment_creator());
+
+            //Tra ve ket qua
+            return this.add(pre);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return false;
+
+    }
+
+    //Khi them khi trung ten
+    private boolean isExisting(CategoryObject item) {
+        boolean flag = false;
+
+        String sql = "SELECT category_id FROM tblcategory ";
+        sql += "WHERE category_name='" + item.getCategory_name() + "' ";
+
+        ResultSet rs = this.gets(sql);
+        if (rs != null) {
+            try {
+                if (rs.next()) {
+                    flag = true;
+                }
+                rs.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        return flag;
+    }
+
+
+    /**
+     * delCategory
+     *
+     * @param item CategoryObject
+     * @return boolean
+     * @todo Implement this jsoft.ads.category.Category method
+     */
+    public boolean delCategory(CategoryObject item) {
+
+        String sql  = "DELETE FROM tblcategory WHERE category_id=?";
+        try {
+            PreparedStatement pre = this.con.prepareStatement(sql);
+            pre.setInt(1, item.getCategory_id());
+
+            return this.del(pre);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return false;
+    }
+
+    /**
+     * editCategory
+     *
+     * @param item CategoryObject
+     * @return boolean
+     * @todo Implement this jsoft.ads.category.Category method
+     */
+    public boolean editCategory(CategoryObject item) {
+        //Cau lenh cap nhat sua
+        String sql = "UPDATE tblcategory SET ";
+
+        sql += "category_name=?, ";
+        sql += "category_last_updated_at=?, ";
+        sql += "category_enable=?, ";
+        sql += "category_assessment_id=?, category_assessment_creator=? ";
+
+        sql += "WHERE category_id=?";
+
+        //Bien dich
+        try {
+            PreparedStatement pre = this.con.prepareStatement(sql);
+
+            //Truyen gia tri
+            pre.setString(1, item.getCategory_name());
+
+            pre.setString(2, item.getCategory_last_updated_at());
+
+            pre.setBoolean(3, item.isCategory_enable());
+            pre.setInt(4, item.getCategory_assessment_id());
+            pre.setInt(5, item.getCategory_assessment_creator());
+
+             pre.setInt(6, item.getCategory_id());
+
+            //Tra ve ket qua
+            return this.edit(pre);
+
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return false;
+    }
+
+    /**
+     * getCP
+     *
+     * @return ConnectionPool
+     * @todo Implement this jsoft.ShareControl method
+     */
+    public ConnectionPool getCP() {
+        return null;
+    }
+
+    /**
+     * getCategory
+     *
+     * @param id int
+     * @return ResultSet
+     * @todo Implement this jsoft.ads.category.Category method
+     */
+    public ResultSet getCategory(int id) {
+        String sql = "SELECT * FROM tblcategory WHERE category_id=?";
+        return this.get(sql, id);
+    }
+
+    /**
+     * getCategorys
+     *
+     * @param similar CategoryObject
+     * @param at int
+     * @param total byte
+     * @return ResultSet
+     * @todo Implement this jsoft.ads.category.Category method
+     */
+    public ResultSet getCategorys(CategoryObject similar, int at, byte total) {
+        String sql = "SELECT * FROM tblcategory ";
+        sql += "";
+        sql += "";
+        sql += "ORDER BY category_name ASC ";
+        sql += "LIMIT "+at+", "+total;
+
+        return this.gets(sql);
+
+    }
+
+    /**
+     * releaseCon
+     *
+     * @todo Implement this jsoft.ShareControl method
+     */
+    public void releaseCon() {
+    }
+
+    public static void main(String[] args) {
+
+        //Tao bo quan li ket noi
+        ConnectionPool cp = new ConnectionPoolImpl();
+
+        //Tao doi tuong thuc thi chuc nang
+        Category c = new CategoryImpl(cp);
+
+        //Lay danh sach ban ghi nguoi su dung
+        ResultSet rs = c.getCategorys(null, 0, (byte)15);
+
+    }
+}

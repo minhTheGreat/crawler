@@ -1,0 +1,187 @@
+package jsoft.ads.framework_assessment;
+
+import java.sql.*;
+import jsoft.objects.*;
+import jsoft.ads.article.*;
+import jsoft.*;
+
+public class Framework_assessmentImpl extends ArticleImpl implements Framework_assessment {
+    public Framework_assessmentImpl(ConnectionPool cp, String objectName) {
+         super(cp, objectName);
+    }
+
+    /**
+     * addFramework_assessment
+     *
+     * @param item Framework_assessmentObject
+     * @return boolean
+     * @todo Implement this jsoft.ads.assessment.Framework_assessment method
+     */
+    public boolean addFramework_assessment(Framework_assessmentObject item) {
+
+        String sql = "INSERT INTO tblframework_assessment( ";
+
+        sql += "fa_name, fa_article_id,";
+        sql += "fa_enable, fa_delete, ";
+        sql += "fa_created_at, fa_creator_id,";
+        sql += "fa_creator_name, fa_last_updated_at, ";
+        sql += "fa_last_updator_id, fa_last_updator_name)";
+
+        sql += "VALUES(?,?,?,?,?,?,?,?,?,?)";
+
+        try{
+        PreparedStatement pre = this.con.prepareStatement(sql);
+        //Truyen gia tri
+
+           pre.setString(1, item.getFa_name());
+           pre.setInt(2, item.getFa_article_id());
+           pre.setBoolean(3, item.isFa_enable());
+           pre.setBoolean(4, item.isFa_delete());
+           pre.setString(5, item.getFa_created_at());
+           pre.setInt(6, item.getFa_creator_id());
+           pre.setString(7, item.getFa_creator_name());
+           pre.setString(8, item.getFa_last_updated_at());
+           pre.setInt(9, item.getFa_last_updator_id());
+           pre.setString(10, item.getFa_last_updator_name());
+
+           //Tra ve ket qua
+           return this.add(pre);
+
+       } catch (SQLException ex) {
+           ex.printStackTrace();
+       }
+
+
+
+        return false;
+    }
+
+
+    /**
+     * delFramework_assessment
+     *
+     * @param item Framework_assessmentObject
+     * @return boolean
+     * @todo Implement this jsoft.ads.assessment.Framework_assessment method
+     */
+    public boolean delFramework_assessment(Framework_assessmentObject item) {
+
+        String sql  = "DELETE FROM tblframework_assessment WHERE fa_id=?";
+        try {
+            PreparedStatement pre = this.con.prepareStatement(sql);
+            pre.setInt(1, item.getFa_id());
+
+            return this.del(pre);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+
+        return false;
+    }
+
+    /**
+     * editFramework_assessment
+     *
+     * @param item Framework_assessmentObject
+     * @return boolean
+     * @todo Implement this jsoft.ads.assessment.Framework_assessment method
+     */
+    public boolean editFramework_assessment(Framework_assessmentObject item) {
+
+        String sql = "UPDATE tblframework_assessment SET ";
+
+        sql += "fa_name=?, fa_assessment_id=?, fa_enable=?, ";
+        sql += "fa_delete=?, ";
+        sql += "fa_creator_name=?, ";
+        sql += "fa_last_updated_at=?, fa_last_updator_id=?,";
+        sql += "fa_last_updator_name=? ";
+
+        sql += "WHERE fa_id=?";
+
+        try{
+        PreparedStatement pre = this.con.prepareStatement(sql);
+        //Truyen gia tri
+           pre.setString(1, item.getFa_name());
+           pre.setInt(2, item.getFa_article_id());
+           pre.setBoolean(3, item.isFa_enable());
+           pre.setBoolean(4, item.isFa_delete());
+
+           pre.setString(5, item.getFa_creator_name());
+           pre.setString(6, item.getFa_last_updated_at());
+           pre.setInt(7, item.getFa_last_updator_id());
+           pre.setString(8, item.getFa_last_updator_name());
+
+           pre.setInt(9, item.getFa_id());
+
+           //Tra ve ket qua
+           return this.edit(pre);
+
+       } catch (SQLException ex) {
+           ex.printStackTrace();
+       }
+
+        return false;
+    }
+
+    /**
+     * getFramework_assessment
+     *
+     * @param id int
+     * @return ResultSet
+     * @todo Implement this jsoft.ads.assessment.Framework_assessment method
+     */
+    public ResultSet getFramework_assessment(int id) {
+        String sql = "SELECT * FROM tblassessment ";
+        sql += "LEFT JOIN tblframework_assessment ON assessment_fa_id=fa_id ";
+
+        sql += "WHERE assessment_fa_id=?";
+
+        return this.get(sql, id);
+    }
+
+    /**
+     * getFramework_assessments
+     *
+     * @param similar Framework_assessmentObject
+     * @param at int
+     * @param total byte
+     * @return ResultSet
+     * @todo Implement this jsoft.ads.assessment.Framework_assessment method
+     */
+    public ResultSet getFramework_assessments(Framework_assessmentObject similar, int at, byte total) {
+        String sql = "SELECT * FROM tblframework_assessment ";
+        sql += "LEFT JOIN tblassessment ON assessment_fa_id=fa_id ";
+//        sql += "LEFT JOIN tblarticle ON fa_article_id=article_id ";
+//        sql += "LEFT JOIN tblcategory ON article_category_id=category_id ";
+//        sql += "LEFT JOIN tblsource ON category_source_id=source_id ";
+
+        sql += "";
+        sql += "ORDER BY fa_id DESC ";
+        sql += "LIMIT "+at+", "+total;
+
+        return this.gets(sql);
+
+    }
+
+    /**
+     * getCP
+     *
+     * @return ConnectionPool
+     * @todo Implement this jsoft.ShareControl method
+     */
+    public ConnectionPool getCP() {
+        return null;
+    }
+
+    /**
+     * releaseCon
+     *
+     * @todo Implement this jsoft.ShareControl method
+     */
+    public void releaseCon() {
+    }
+
+
+}
